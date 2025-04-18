@@ -1,17 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "@/app/globals.css";
 import Header from "@/components/navigation/header";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -52,21 +40,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function ShopLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
-      >
-        <Header />
-        <main className="container px-4 py-8 mx-auto max-w-7xl">
-          {children}
-        </main>
-      </body>
-    </html>
+    <>
+      <Header />
+      <main className="container px-4 py-8 mx-auto max-w-7xl">{children}</main>
+    </>
   );
 }
