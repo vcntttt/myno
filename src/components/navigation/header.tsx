@@ -109,14 +109,14 @@ export default function Header() {
           ) : (
             <>
               <Button asChild aria-label="Iniciar Sesión">
-                <Link href="/login">Iniciar Sesión</Link>
+                <Link href="/auth/login">Iniciar Sesión</Link>
               </Button>
               <Button
                 asChild
                 aria-label="Iniciar Sesión"
                 className="hidden md:inline-flex"
               >
-                <Link href="/register">Registro</Link>
+                <Link href="/auth/register">Registro</Link>
               </Button>
             </>
           )}
