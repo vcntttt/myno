@@ -8,6 +8,23 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { RegisterForm } from "@/components/auth/register-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Crea una nueva cuenta | Myno Tienda Mayorista",
+  description:
+    "Regístrate en Myno para comprar productos al por mayor rápidamente.",
+  openGraph: {
+    title: "Regístrate | Myno Tienda Mayorista",
+    description:
+      "Únete a Myno y disfruta de compras al por mayor con ofertas especiales para minimarkets.",
+    url: "https://myno-vr.vercel.app/auth/register",
+    images: ["/og-logo.png"],
+    siteName: "Myno",
+    locale: "es_CL",
+    type: "website",
+  },
+};
 
 export default function RegisterPage() {
   return (
