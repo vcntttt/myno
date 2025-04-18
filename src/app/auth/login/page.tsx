@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import type { Metadata } from "next";
 import { LoginForm } from "@/components/auth/login-form";
+import { Logo } from "@/components/logo";
 
 export const metadata: Metadata = {
   title: "Inicia sesión en tu cuenta | Myno Tienda Mayorista",
@@ -28,30 +29,41 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-lg md:text-xl">Inicia Sesión</CardTitle>
-        <CardDescription className="text-xs md:text-sm sr-only">
-          Ingrese su correo electrónico a continuación para iniciar sesión en su
-          cuenta
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <LoginForm />
-      </CardContent>
-      <CardFooter className="flex flex-col gap-4">
-        <p className="text-center text-xs text-neutral-500 w-full">
-          ¿No tienes cuenta?{" "}
-          <Link href="/auth/register" className="underline">
-            <span className="dark:text-orange-200/90">Registrate ahora.</span>
-          </Link>
-        </p>
-        <div className="flex justify-center w-full border-t py-4">
-          <p className="text-center text-xs text-neutral-500">
-            Secured by <span className="text-neutral-600">better-auth.</span>
-          </p>
+    <>
+      <Link
+        href="/"
+        className="flex items-center gap-2 self-center font-medium"
+      >
+        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+          <Logo />
         </div>
-      </CardFooter>
-    </Card>
+        Myno
+      </Link>
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-lg md:text-xl">Inicia Sesión</CardTitle>
+          <CardDescription className="text-xs md:text-sm sr-only">
+            Ingrese su correo electrónico a continuación para iniciar sesión en
+            su cuenta
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LoginForm />
+        </CardContent>
+        <CardFooter className="flex flex-col gap-4">
+          <p className="text-center text-xs text-neutral-500 w-full">
+            ¿No tienes cuenta?{" "}
+            <Link href="/auth/register" className="underline">
+              <span className="dark:text-orange-200/90">Registrate ahora.</span>
+            </Link>
+          </p>
+          <div className="flex justify-center w-full border-t py-4">
+            <p className="text-center text-xs text-neutral-500">
+              Secured by <span className="text-neutral-600">better-auth.</span>
+            </p>
+          </div>
+        </CardFooter>
+      </Card>
+    </>
   );
 }
