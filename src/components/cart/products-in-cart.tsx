@@ -43,7 +43,12 @@ export const ProductsInCart = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-medium">{item.name}</h3>
+                  <Link
+                    href={`/products/${item.slug}`}
+                    className="hover:underline"
+                  >
+                    <h3 className="font-medium">{item.name}</h3>
+                  </Link>
                   <p className="text-muted-foreground text-sm">
                     {item.categoria}
                   </p>
