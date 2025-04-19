@@ -35,6 +35,9 @@ export default function SearchPage() {
   const [viewMode, setViewMode] = useQueryState("viewMode", {
     defaultValue: "grid",
   });
+  const [sortBy, setSortBy] = useQueryState("sortBy", {
+    defaultValue: "relevance",
+  });
 
   const FiltersComponent = () => (
     <div className="space-y-6">
@@ -181,7 +184,7 @@ export default function SearchPage() {
               </p>
             </div>
             <div className="flex items-center gap-4 w-full sm:w-auto">
-              <Select value={"relevance"} onValueChange={() => {}}>
+              <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-full sm:w-[180px]">
                   <SelectValue placeholder="Ordenar por" />
                 </SelectTrigger>
@@ -193,7 +196,6 @@ export default function SearchPage() {
                   <SelectItem value="price-desc">
                     Precio: mayor a menor
                   </SelectItem>
-                  <SelectItem value="rating">Mejor valorados</SelectItem>
                   <SelectItem value="newest">Más recientes</SelectItem>
                 </SelectContent>
               </Select>
