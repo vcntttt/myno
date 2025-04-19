@@ -50,6 +50,10 @@ export default function SearchPage() {
     clearOnDefault: false,
   });
 
+  function clearFilters() {
+    setSelectedCategories([]);
+  }
+
   const totalItems = products.length;
   const filteredProducts = products.filter((product) => {
     if (
@@ -144,7 +148,7 @@ export default function SearchPage() {
               <div className="py-4">
                 <div className="flex items-center justify-between mb-6">
                   <SheetTitle>Filtros</SheetTitle>
-                  <Button variant="ghost" size="sm" onClick={() => {}}>
+                  <Button variant="ghost" size="sm" onClick={clearFilters}>
                     Limpiar todo
                   </Button>
                 </div>
@@ -171,7 +175,7 @@ export default function SearchPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => {}}
+                onClick={clearFilters}
                 className="h-8 text-sm"
               >
                 Limpiar
