@@ -13,8 +13,8 @@ export function ProductCard({ name, price, image, slug }: Product) {
       href={`/products/${slug}`}
       className="block transition-opacity hover:opacity-80"
     >
-      <Card className="overflow-hidden rounded-none pt-0">
-        <CardHeader className="md:px-0">
+      <Card className="overflow-hidden rounded-t-md pt-0">
+        <CardHeader className="px-0 md:px-0">
           <Image
             src={image ?? defaultIMG}
             placeholder="blur"

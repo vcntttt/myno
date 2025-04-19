@@ -37,8 +37,10 @@ export function ProductDetail({
           </li>
           <li className="flex items-center space-x-2">
             <span>/</span>
-            <Link href="/search" className="hover:text-foreground">
-              {/* // TODO: redireccionar a pagina de busqueda con categoria filtrada */}
+            <Link
+              href={`/search?selectedCategories=${product.categoria.toLowerCase()}`}
+              className="hover:text-foreground"
+            >
               {product.categoria}
             </Link>
           </li>

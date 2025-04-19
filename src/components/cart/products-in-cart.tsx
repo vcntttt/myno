@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Trash2, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { useCartStore } from "@/store/cart";
 import Image from "next/image";
+import { QuantitySelector } from "./quantity-selector";
 
 export const ProductsInCart = () => {
   const {
@@ -32,7 +32,7 @@ export const ProductsInCart = () => {
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-col sm:flex-row items-start sm:items-center gap-6 py-4"
+                className="flex flex-row items-start sm:items-center gap-6 py-4"
               >
                 <div className="w-20 h-20 bg-muted rounded-md overflow-hidden flex-shrink-0">
                   <Image
@@ -43,51 +43,43 @@ export const ProductsInCart = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-medium">{item.name}</h3>
+                  <Link
+                    href={`/products/${item.slug}`}
+                    className="hover:underline"
+                  >
+                    <h3 className="font-medium">{item.name}</h3>
+                  </Link>
                   <p className="text-muted-foreground text-sm">
                     {item.categoria}
                   </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() =>
-                      updateProductQuantity(item.id, item.quantity - 1)
-                    }
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <span className="w-8 text-center">{item.quantity}</span>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() =>
-                      updateProductQuantity(item.id, item.quantity + 1)
-                    }
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
-                    <p className="font-medium">
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      ${item.price.toFixed(2)} / unidad
-                    </p>
-                  </div>
                   <Button
                     variant="ghost"
-                    size="icon"
-                    className="text-destructive"
+                    className="p-0 text-sm text-destructive"
                     onClick={() => removeFromCart(item.id)}
                   >
-                    <Trash2 className="h-4 w-4" />
+                    Eliminar
                   </Button>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <p className="font-medium">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        ${item.price.toFixed(2)} / unidad
+                      </p>
+                    </div>
+                  </div>
+                  <QuantitySelector
+                    quantity={item.quantity}
+                    onDecrement={() =>
+                      updateProductQuantity(item.id, item.quantity - 1)
+                    }
+                    onIncrement={() =>
+                      updateProductQuantity(item.id, item.quantity + 1)
+                    }
+                  />
                 </div>
               </div>
             ))}

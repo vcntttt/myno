@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import Header from "@/components/navigation/header";
+import { Suspense } from "react";
+
+const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://myno-vr.vercel.app";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: {
     default: "Myno | Tienda Mayorista",
     template: "%s | Myno Tienda Mayorista",
@@ -47,7 +54,9 @@ export default function ShopLayout({
 }>) {
   return (
     <>
-      <Header />
+      <Suspense>
+        <Header />
+      </Suspense>
       <main className="container px-4 py-8 mx-auto max-w-7xl">{children}</main>
     </>
   );

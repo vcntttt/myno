@@ -15,6 +15,7 @@ import {
 import { Logo } from "@/components/logo";
 import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 import { ShoppingCartButton } from "./shopping-cart";
+import { SearchBar } from "./search";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // es para mobile
@@ -58,20 +59,7 @@ export default function Header() {
               <ShoppingCartButton />
             </Link>
           </Button>
-          <div className="items-center hidden md:flex">
-            <div className="relative flex items-center w-64 h-9">
-              <Input
-                type="search"
-                placeholder="Buscador"
-                className="h-9 w-full"
-              />
-              <Button size="sm" variant="ghost" className="absolute right-0">
-                <Link href={`/search`}>
-                  <Search className="w-4 h-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+          <SearchBar />
 
           {/* Mobile Search Toggle */}
           <div className="flex md:hidden">
