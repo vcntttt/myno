@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Logo } from "@/components/logo";
+import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // es para mobile
@@ -120,6 +121,7 @@ export default function Header() {
               </Button>
             </>
           )}
+          <ThemeSwitcher />
         </div>
       </div>
 
