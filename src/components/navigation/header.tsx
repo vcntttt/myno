@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Search, ShoppingCart, User, X } from "lucide-react";
+import { Search, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Logo } from "@/components/logo";
 import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
+import { ShoppingCartButton } from "./shopping-cart";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // es para mobile
@@ -54,7 +55,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <Button variant="ghost" asChild size="icon" aria-label="Carrito">
             <Link href={`/cart`}>
-              <ShoppingCart />
+              <ShoppingCartButton />
             </Link>
           </Button>
           <div className="items-center hidden md:flex">
