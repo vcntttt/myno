@@ -28,10 +28,13 @@ import {
 } from "@/components/ui/sheet";
 import { categories } from "@/data/categories";
 import { recommendations } from "@/data/products";
+import { useQueryState } from "nuqs";
 
 export default function SearchPage() {
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-  const viewMode = "grid";
+  const [viewMode, setViewMode] = useQueryState("viewMode", {
+    defaultValue: "grid",
+  });
 
   const FiltersComponent = () => (
     <div className="space-y-6">
@@ -199,7 +202,7 @@ export default function SearchPage() {
                   variant={viewMode === "grid" ? "default" : "ghost"}
                   size="icon"
                   className="rounded-none rounded-l-md"
-                  onClick={() => "grid"}
+                  onClick={() => setViewMode("grid")}
                   aria-label="Vista de cuadrícula"
                 >
                   <Grid className="h-4 w-4" />
@@ -208,7 +211,7 @@ export default function SearchPage() {
                   variant={viewMode === "list" ? "default" : "ghost"}
                   size="icon"
                   className="rounded-none rounded-r-md"
-                  onClick={() => "list"}
+                  onClick={() => setViewMode("list")}
                   aria-label="Vista de lista"
                 >
                   <List className="h-4 w-4" />
@@ -233,7 +236,7 @@ export default function SearchPage() {
             </div>
           ) : (
             <>
-              {"grid" === "grid" ? (
+              {viewMode === "grid" ? (
                 <p>grid</p>
               ) : (
                 <div className="space-y-4">
