@@ -16,7 +16,7 @@ Myno es una plataforma web B2B que conecta proveedores con pequeñas y medianas 
 1. Clona este repositorio
 
    ```bash
-   git clone https://github.com/tu-usuario/myno.git
+   git clone https://github.com/vcntttt/myno.git
    ```
 
 2. Instala dependencias
