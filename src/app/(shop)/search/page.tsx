@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { Search, SlidersHorizontal, Grid, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import {
   Select,
   SelectContent,
@@ -25,19 +23,57 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
+  SheetTitle,
 } from "@/components/ui/sheet";
 import { categories } from "@/data/categories";
-import { recommendations } from "@/data/products";
-import { useQueryState } from "nuqs";
+import { recommendations as products } from "@/data/products";
+import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+import { ProductCard } from "@/components/products/product-card";
+import { ProductCardList } from "@/components/products/product-card-list";
 
 export default function SearchPage() {
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [viewMode, setViewMode] = useQueryState("viewMode", {
     defaultValue: "grid",
+    clearOnDefault: false,
   });
   const [sortBy, setSortBy] = useQueryState("sortBy", {
     defaultValue: "relevance",
+    clearOnDefault: false,
   });
+  const [selectedCategories = [], setSelectedCategories] = useQueryState<
+    string[]
+  >("selectedCategories", parseAsArrayOf(parseAsString).withDefault([]));
+
+  const [searchQuery = ""] = useQueryState("query", {
+    defaultValue: "",
+    clearOnDefault: false,
+  });
+
+  const totalItems = products.length;
+  const filteredProducts = products.filter((product) => {
+    if (
+      selectedCategories?.length > 0 &&
+      !selectedCategories.includes(
+        product.categoria.toLowerCase().replace(/\s+/g, "-")
+      )
+    ) {
+      return false;
+    }
+
+    // filtro por texto en nombre o descripción
+    if (searchQuery) {
+      const term = searchQuery.toLowerCase();
+      const hayEnNombre = product.name.toLowerCase().includes(term);
+      const hayEnDesc = product.description?.toLowerCase().includes(term);
+      if (!hayEnNombre && !hayEnDesc) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+  const resultsCount = filteredProducts.length;
 
   const FiltersComponent = () => (
     <div className="space-y-6">
@@ -53,8 +89,19 @@ export default function SearchPage() {
                 <div key={category.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={`category-${category.id}`}
-                    checked={false}
-                    onCheckedChange={() => {}}
+                    checked={selectedCategories?.includes(category.id)}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setSelectedCategories([
+                          ...selectedCategories,
+                          category.id,
+                        ]);
+                      } else {
+                        setSelectedCategories(
+                          selectedCategories.filter((c) => c !== category.id)
+                        );
+                      }
+                    }}
                   />
                   <Label
                     htmlFor={`category-${category.id}`}
@@ -71,32 +118,6 @@ export default function SearchPage() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-
-      {/* Rango de precio */}
-      <Accordion type="single" collapsible defaultValue="price">
-        <AccordionItem value="price">
-          <AccordionTrigger className="text-base font-medium">
-            Precio
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-4">
-              <div className="pt-4">
-                <Slider
-                  defaultValue={[0, 300]}
-                  max={300}
-                  step={1}
-                  value={[0.3]}
-                  onValueChange={() => {}}
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="border rounded-md px-3 py-1">${0}</div>
-                <div className="border rounded-md px-3 py-1">${300}</div>
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
     </div>
   );
 
@@ -105,22 +126,6 @@ export default function SearchPage() {
       {/* Barra de búsqueda principal */}
       <div className="mb-8">
         <div className="flex gap-2">
-          <div className="relative flex-1">
-            <Input
-              type="search"
-              placeholder="Buscar productos..."
-              className="pr-10"
-              value={""}
-              onChange={() => {}}
-            />
-            <Button
-              size="icon"
-              variant="ghost"
-              className="absolute right-0 top-0 h-full"
-            >
-              <Search className="w-4 h-4" />
-            </Button>
-          </div>
           <Sheet
             open={isMobileFiltersOpen}
             onOpenChange={setIsMobileFiltersOpen}
@@ -135,10 +140,10 @@ export default function SearchPage() {
                 Filtros
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[350px]">
+            <SheetContent side="left" className="w-[300px] sm:w-[350px] p-4">
               <div className="py-4">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-lg font-semibold">Filtros</h2>
+                  <SheetTitle>Filtros</SheetTitle>
                   <Button variant="ghost" size="sm" onClick={() => {}}>
                     Limpiar todo
                   </Button>
@@ -147,7 +152,9 @@ export default function SearchPage() {
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-background">
                 <SheetClose asChild>
-                  <Button className="w-full">Ver {0} resultados</Button>
+                  <Button className="w-full">
+                    Ver {resultsCount} resultados
+                  </Button>
                 </SheetClose>
               </div>
             </SheetContent>
@@ -180,7 +187,7 @@ export default function SearchPage() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <div>
               <p className="text-sm text-muted-foreground">
-                Mostrando {0} de {0} resultados
+                Mostrando {resultsCount} de {totalItems} resultados
               </p>
             </div>
             <div className="flex items-center gap-4 w-full sm:w-auto">
@@ -223,7 +230,7 @@ export default function SearchPage() {
           </div>
 
           {/* Lista de productos */}
-          {recommendations.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <Search className="h-12 w-12 text-muted-foreground mb-4" />
               <h2 className="text-xl font-semibold mb-2">
@@ -239,10 +246,16 @@ export default function SearchPage() {
           ) : (
             <>
               {viewMode === "grid" ? (
-                <p>grid</p>
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {filteredProducts.map((product) => (
+                    <ProductCard key={product.id} {...product} />
+                  ))}
+                </div>
               ) : (
                 <div className="space-y-4">
-                  <p>lista</p>
+                  {filteredProducts.map((product) => (
+                    <ProductCardList key={product.id} {...product} />
+                  ))}
                 </div>
               )}
             </>
