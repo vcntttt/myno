@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { useState } from "react";
 import { Search, SlidersHorizontal, Grid, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -65,12 +65,12 @@ function RealSearchPage() {
       return false;
     }
 
-    // filtro por texto en nombre o descripción
     if (searchQuery) {
       const term = searchQuery.toLowerCase();
-      const hayEnNombre = product.name.toLowerCase().includes(term);
-      const hayEnDesc = product.description?.toLowerCase().includes(term);
-      if (!hayEnNombre && !hayEnDesc) {
+      if (
+        !product.name.toLowerCase().includes(term) &&
+        !product.description?.toLowerCase().includes(term)
+      ) {
         return false;
       }
     }
@@ -79,9 +79,19 @@ function RealSearchPage() {
   });
   const resultsCount = filteredProducts.length;
 
+  const sortedProducts = useMemo(() => {
+    switch (sortBy) {
+      case "price-asc":
+        return [...filteredProducts].sort((a, b) => a.price - b.price);
+      case "price-desc":
+        return [...filteredProducts].sort((a, b) => b.price - a.price);
+      default:
+        return filteredProducts;
+    }
+  }, [filteredProducts, sortBy]);
+
   const FiltersComponent = () => (
     <div className="space-y-6">
-      {/* Categorías */}
       <Accordion type="single" collapsible defaultValue="categories">
         <AccordionItem value="categories">
           <AccordionTrigger className="text-base font-medium">
@@ -111,10 +121,7 @@ function RealSearchPage() {
                     htmlFor={`category-${category.id}`}
                     className="flex-1 text-sm cursor-pointer"
                   >
-                    {category.name}{" "}
-                    <span className="text-muted-foreground">
-                      ({category.count})
-                    </span>
+                    {category.name} ( {category.count} )
                   </Label>
                 </div>
               ))}
@@ -127,7 +134,6 @@ function RealSearchPage() {
 
   return (
     <>
-      {/* Barra de búsqueda principal */}
       <div className="mb-8">
         <div className="flex gap-2">
           <Sheet
@@ -167,7 +173,6 @@ function RealSearchPage() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Filtros laterales (desktop) */}
         <div className="hidden md:block w-64 flex-shrink-0">
           <div className="sticky top-24">
             <div className="flex items-center justify-between mb-6">
@@ -185,9 +190,7 @@ function RealSearchPage() {
           </div>
         </div>
 
-        {/* Resultados */}
         <div className="flex-1">
-          {/* Barra de herramientas */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <div>
               <p className="text-sm text-muted-foreground">
@@ -207,7 +210,7 @@ function RealSearchPage() {
                   <SelectItem value="price-desc">
                     Precio: mayor a menor
                   </SelectItem>
-                  <SelectItem value="newest">Más recientes</SelectItem>
+                  {/* <SelectItem value="newest">Más recientes</SelectItem> */}
                 </SelectContent>
               </Select>
               <div className="flex border rounded-md">
@@ -233,8 +236,7 @@ function RealSearchPage() {
             </div>
           </div>
 
-          {/* Lista de productos */}
-          {filteredProducts.length === 0 ? (
+          {sortedProducts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <Search className="h-12 w-12 text-muted-foreground mb-4" />
               <h2 className="text-xl font-semibold mb-2">
@@ -243,7 +245,7 @@ function RealSearchPage() {
               <p className="text-muted-foreground mb-6">
                 Intenta con otros términos de búsqueda o ajusta los filtros
               </p>
-              <Button variant="outline" onClick={() => {}}>
+              <Button variant="outline" onClick={clearFilters}>
                 Limpiar filtros
               </Button>
             </div>
@@ -251,13 +253,13 @@ function RealSearchPage() {
             <>
               {viewMode === "grid" ? (
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                  {filteredProducts.map((product) => (
+                  {sortedProducts.map((product) => (
                     <ProductCard key={product.id} {...product} />
                   ))}
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {filteredProducts.map((product) => (
+                  {sortedProducts.map((product) => (
                     <ProductCardList key={product.id} {...product} />
                   ))}
                 </div>
