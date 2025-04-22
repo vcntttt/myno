@@ -16,6 +16,7 @@ import { Logo } from "@/components/logo";
 import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 import { ShoppingCartButton } from "./shopping-cart";
 import { SearchBar } from "./search";
+import { user } from "@/data/user";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // es para mobile
@@ -34,8 +35,6 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const session = false;
 
   return (
     <header
@@ -78,7 +77,7 @@ export default function Header() {
           </div>
 
           {/* Profile Dropdown */}
-          {session ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" aria-label="Perfil">
