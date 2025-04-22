@@ -43,7 +43,7 @@ export default function Header() {
         hasScrolled ? "border-b shadow-sm" : ""
       }`}
     >
-      <div className="container flex items-center justify-between h-16 px-4 mx-auto">
+      <div className="container max-w-7xl flex items-center justify-between h-16 px-4 mx-auto">
         <Link
           href="/"
           className="text-xl font-semibold flex items-center gap-x-2"
