@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Share2, ShoppingCart } from "lucide-react";
+import { ClipboardCheck, Share2, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import type { Product } from "@/types/products";
 import { ProductCard } from "@/components/products/product-card";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cart";
+import { toast } from "sonner";
 
 interface ProductDetailProps {
   product: Product;
@@ -94,7 +95,20 @@ export function ProductDetail({
               <ShoppingCart className="mr-2 h-5 w-5" />
               Añadir al carrito
             </Button>
-            <Button variant="outline" size="icon" className="hidden sm:flex">
+            <Button
+              variant="outline"
+              size="icon"
+              className="hidden sm:flex"
+              onClick={() => {
+                navigator.clipboard.writeText(window.location.href);
+                toast(
+                  <div className="flex items-center gap-2">
+                    <ClipboardCheck className="h-5 w-5" />
+                    Enlace copiado al portapapeles
+                  </div>
+                );
+              }}
+            >
               <Share2 className="h-5 w-5" />
             </Button>
           </div>
