@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { user } from "@/data/user";
+import { user } from "@/lib/data/user";
 import Link from "next/link";
 
 export const UserInfo = () => {

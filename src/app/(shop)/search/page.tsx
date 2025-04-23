@@ -25,8 +25,8 @@ import {
   SheetClose,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { categories } from "@/data/categories";
-import { recommendations as products } from "@/data/products";
+import { categories } from "@/lib/data/categories";
+import { recommendations as products } from "@/lib/data/products";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { ProductCard } from "@/components/products/product-card";
 import { ProductCardList } from "@/components/products/product-card-list";
