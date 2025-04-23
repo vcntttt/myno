@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import type { Purchase } from "@/types/purchase";
 import {
   Table,
@@ -38,11 +37,9 @@ export function PurchaseDetails({ purchase }: PurchaseDetailsProps) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Eye className="mr-2 h-4 w-4" />
-          Ver detalles
-        </DropdownMenuItem>
+      <DialogTrigger className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
+        <Eye className="h-4 w-4" />
+        Ver detalles
       </DialogTrigger>
       <DialogContent className="max-w-3xl">
         <DialogHeader>

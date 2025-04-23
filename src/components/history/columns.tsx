@@ -4,15 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { Purchase } from "@/types/purchase";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { ArrowUpDown } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -173,34 +165,11 @@ export const columns: ColumnDef<Purchase>[] = [
     },
   },
   {
-    id: "actions",
+    id: "details",
     cell: ({ row }) => {
       const purchase = row.original;
 
-      return (
-        <div className="text-right">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Abrir menú</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-              <PurchaseDetails purchase={purchase} />
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Ver factura</DropdownMenuItem>
-              <DropdownMenuItem>Repetir compra</DropdownMenuItem>
-              {purchase.status.toLowerCase() === "processing" && (
-                <DropdownMenuItem className="text-destructive">
-                  Cancelar pedido
-                </DropdownMenuItem>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      );
+      return <PurchaseDetails purchase={purchase} />;
     },
   },
 ];
