@@ -35,7 +35,6 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-  Download,
   Settings,
   X,
 } from "lucide-react";
@@ -101,14 +100,6 @@ export function DataTable<TData, TValue>({
           />
         </div>
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1"
-          >
-            <Download className="h-4 w-4" />
-            <span>Exportar</span>
-          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button

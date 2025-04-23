@@ -28,6 +28,7 @@ import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import type { PurchaseStatus } from "@/types/purchase";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { getStatusLabel } from "@/lib/utils/purchase-status";
 
 interface HistoryFiltersProps {
   dateRange: {
@@ -75,24 +76,8 @@ export function HistoryFilters({
     }
   };
 
-  // Get status label in Spanish
-  const getStatusLabel = (status: PurchaseStatus) => {
-    switch (status) {
-      case "Delivered":
-        return "Entregado";
-      case "Processing":
-        return "En proceso";
-      case "Cancelled":
-        return "Cancelado";
-      default:
-        return status;
-    }
-  };
-
-  // Filter content component (used in both popover and drawer)
   const FilterContent = () => (
     <div className="space-y-6 py-2">
-      {/* Status Filter - Now prominently displayed at the top */}
       <div className="space-y-2">
         <h4 className="font-medium">Estado del pedido</h4>
         <div className="flex flex-wrap gap-2">
@@ -114,12 +99,7 @@ export function HistoryFilters({
       {/* Date Range Filter */}
       <div className="space-y-2">
         <h4 className="font-medium">Rango de fechas</h4>
-        <div
-          className={cn(
-            "grid gap-2",
-            isDesktop ? "grid-cols-2" : "grid-cols-1"
-          )}
-        >
+        <div className={cn("flex flex-col gap-2")}>
           <div className="grid gap-1">
             <Label htmlFor="from">Desde</Label>
             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
