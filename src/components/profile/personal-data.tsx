@@ -1,4 +1,4 @@
-import { user } from "@/data/user";
+import { user } from "@/lib/data/user";
 import {
   Card,
   CardContent,

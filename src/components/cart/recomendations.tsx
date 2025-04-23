@@ -1,4 +1,4 @@
-import { recommendations } from "@/data/products";
+import { recommendations } from "@/lib/data/products";
 import { ProductCard } from "../products/product-card";
 
 export const Recomendations = () => {

@@ -1,5 +1,5 @@
 import { ProductDetail } from "@/components/products/product-details";
-import { recommendations } from "@/data/products";
+import { recommendations } from "@/lib/data/products";
 import { notFound } from "next/navigation";
 
 interface Props {

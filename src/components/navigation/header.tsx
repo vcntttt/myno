@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Search, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,31 +16,14 @@ import { Logo } from "@/components/logo";
 import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 import { ShoppingCartButton } from "./shopping-cart";
 import { SearchBar } from "./search";
-import { user } from "@/data/user";
+import { user } from "@/lib/data/user";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // es para mobile
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <header
-      className={`sticky top-0 z-50 max-w-7xl mx-auto bg-background transition-all duration-200 ${
-        hasScrolled ? "border-b shadow-sm" : ""
-      }`}
+      className={`sticky top-0 z-50 max-w-7xl mx-auto bg-background transition-all duration-200`}
     >
       <div className="container max-w-7xl flex items-center justify-between h-16 px-4 mx-auto">
         <Link
