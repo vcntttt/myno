@@ -26,7 +26,7 @@ export const recommendations: Product[] = [
   {
     id: 3,
     name: "50x Coca Cola",
-    price: 50,
+    price: 60,
     image: cocacola,
     slug: "50x-coca-cola",
     categoria: "Bebidas",
@@ -35,7 +35,7 @@ export const recommendations: Product[] = [
   {
     id: 4,
     name: "50x Lechugas",
-    price: 50,
+    price: 30,
     image: lechugas,
     slug: "50x-lechugas",
     categoria: "Verduras",
