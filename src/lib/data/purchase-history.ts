@@ -1,118 +1,71 @@
-import type { Purchase } from "@/types/purchase"
+import { recommendations } from "@/lib/data/products";
+import { Product } from "@/types/products";
+import type { Purchase, PurchaseItem } from "@/types/purchase";
+
+const mkItem = (productSlug: string, quantity: number): PurchaseItem => {
+  const p = recommendations.find((r : Product) => r.slug === productSlug)!;
+  return { ...p, quantity };
+};
+
+function calculateTotal(items: PurchaseItem[]): number {
+  return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
 
 export const purchaseData: Purchase[] = [
   {
     id: "ORD-001",
-    date: "2025-03-15T14:30:00",
-    total: 45.97,
+    date: "2025-03-15T14:30:00Z",
     status: "Delivered",
-    items: [
-      { id: 1, name: "Camiseta Premium", price: 12.99, quantity: 1 },
-      { id: 2, name: "Pantalones Vaqueros", price: 32.98, quantity: 2 },
-    ],
+    items: [mkItem("50x-manzanas", 2), mkItem("50x-pepsi", 1)],
+    total: calculateTotal([mkItem("50x-manzanas", 2), mkItem("50x-pepsi", 1)]),
   },
   {
     id: "ORD-002",
-    date: "2025-02-28T10:15:00",
-    total: 23.5,
+    date: "2025-02-28T10:15:00Z",
     status: "Delivered",
-    items: [{ id: 3, name: "Zapatillas Deportivas", price: 23.5, quantity: 1 }],
+    items: [mkItem("50x-coca-cola", 1)],
+    total: calculateTotal([mkItem("50x-coca-cola", 1)]),
   },
   {
     id: "ORD-003",
-    date: "2025-02-15T16:45:00",
-    total: 67.45,
+    date: "2025-02-15T16:45:00Z",
     status: "Delivered",
-    items: [
-      { id: 4, name: "Reloj Inteligente", price: 15.99, quantity: 1 },
-      { id: 5, name: "Auriculares Bluetooth", price: 25.99, quantity: 2 },
-    ],
+    items: [mkItem("50x-lechugas", 3)],
+    total: calculateTotal([mkItem("50x-lechugas", 3)]),
   },
   {
     id: "ORD-004",
-    date: "2025-01-03T09:20:00",
-    total: 129.99,
+    date: "2025-01-03T09:20:00Z",
     status: "Delivered",
-    items: [{ id: 6, name: "Mochila Resistente", price: 129.99, quantity: 1 }],
+    items: [mkItem("50x-peras", 1)],
+    total: calculateTotal([mkItem("50x-peras", 1)]),
   },
   {
     id: "ORD-005",
-    date: "2025-04-05T11:30:00",
-    total: 89.97,
+    date: "2025-04-05T11:30:00Z",
     status: "Processing",
-    items: [
-      { id: 7, name: "Gafas de Sol", price: 39.99, quantity: 1 },
-      { id: 8, name: "Chaqueta Impermeable", price: 49.98, quantity: 1 },
-    ],
+    items: [mkItem("mistral-de-manzana", 2)],
+    total: calculateTotal([mkItem("mistral-de-manzana", 2)]),
   },
   {
     id: "ORD-006",
-    date: "2025-03-22T15:10:00",
-    total: 34.99,
+    date: "2025-03-22T15:10:00Z",
     status: "Cancelled",
-    items: [{ id: 9, name: "Botella Térmica", price: 34.99, quantity: 1 }],
+    items: [mkItem("pack-huevos", 1)],
+    total: calculateTotal([mkItem("pack-huevos", 1)]),
   },
   {
     id: "ORD-007",
-    date: "2025-05-10T13:45:00",
-    total: 199.99,
+    date: "2025-05-10T13:45:00Z",
     status: "Processing",
-    items: [{ id: 10, name: "Cámara Compacta", price: 199.99, quantity: 1 }],
+    items: [mkItem("givenchy-men", 1)],
+    total: calculateTotal([mkItem("givenchy-men", 1)]),
   },
   {
     id: "ORD-008",
-    date: "2025-04-18T17:20:00",
-    total: 59.97,
+    date: "2025-04-18T17:20:00Z",
     status: "Delivered",
-    items: [{ id: 11, name: "Bufanda de Lana", price: 19.99, quantity: 3 }],
+    items: [mkItem("50x-pepsi", 4)],
+    total: calculateTotal([mkItem("50x-pepsi", 4)]),
   },
-  {
-    id: "ORD-009",
-    date: "2025-05-02T10:05:00",
-    total: 139.98,
-    status: "Processing",
-    items: [{ id: 12, name: "Altavoz Portátil", price: 69.99, quantity: 2 }],
-  },
-  {
-    id: "ORD-010",
-    date: "2025-01-15T14:30:00",
-    total: 249.99,
-    status: "Delivered",
-    items: [{ id: 13, name: "Tablet Android", price: 249.99, quantity: 1 }],
-  },
-  {
-    id: "ORD-011",
-    date: "2025-02-08T09:15:00",
-    total: 79.98,
-    status: "Delivered",
-    items: [{ id: 14, name: "Teclado Inalámbrico", price: 39.99, quantity: 2 }],
-  },
-  {
-    id: "ORD-012",
-    date: "2025-03-30T16:40:00",
-    total: 149.99,
-    status: "Cancelled",
-    items: [{ id: 15, name: "Monitor LED", price: 149.99, quantity: 1 }],
-  },
-  {
-    id: "ORD-013",
-    date: "2025-04-25T11:20:00",
-    total: 29.99,
-    status: "Delivered",
-    items: [{ id: 16, name: "Ratón Ergonómico", price: 29.99, quantity: 1 }],
-  },
-  {
-    id: "ORD-014",
-    date: "2025-05-15T13:10:00",
-    total: 399.99,
-    status: "Processing",
-    items: [{ id: 17, name: "Consola de Videojuegos", price: 399.99, quantity: 1 }],
-  },
-  {
-    id: "ORD-015",
-    date: "2025-01-28T15:30:00",
-    total: 59.99,
-    status: "Delivered",
-    items: [{ id: 18, name: "Disco Duro Externo", price: 59.99, quantity: 1 }],
-  },
-]
+];
