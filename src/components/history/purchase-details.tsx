@@ -98,24 +98,6 @@ export function PurchaseDetails({ purchase }: PurchaseDetailsProps) {
               </TableBody>
             </Table>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h4 className="font-medium mb-1">Información de envío</h4>
-              <p className="text-sm text-muted-foreground">
-                Calle Ejemplo, 123
-              </p>
-              <p className="text-sm text-muted-foreground">
-                28001 Madrid, España
-              </p>
-            </div>
-            <div>
-              <h4 className="font-medium mb-1">Método de pago</h4>
-              <p className="text-sm text-muted-foreground">
-                Tarjeta terminada en 4242
-              </p>
-            </div>
-          </div>
         </div>
       </DialogContent>
     </Dialog>

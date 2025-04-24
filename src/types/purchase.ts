@@ -1,16 +1,15 @@
+import { Product } from "./products"
+
 export type PurchaseStatus = "Delivered" | "Processing" | "Cancelled"
 
-export interface PurchaseItem {
-  id: number
-  name: string
-  price: number
+export interface PurchaseItem extends Product {
   quantity: number
 }
 
 export interface Purchase {
   id: string
   date: string
-  total: number
   status: string
   items: PurchaseItem[]
+  total: number
 }
