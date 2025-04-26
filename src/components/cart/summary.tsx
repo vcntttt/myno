@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cart";
+import { toast } from "sonner";
 
 export const Summary = () => {
   const total = useCartStore((state) => state.getSummary().total);
@@ -36,8 +37,12 @@ export const Summary = () => {
           </div>
 
           <div className="pt-4">
-            <Button className="w-full" size="lg">
-              Proceder al pago
+            <Button
+              className="w-full"
+              size="lg"
+              onClick={() => toast("Proximamente...")}
+            >
+              Comprar
             </Button>
 
             <p className="text-xs text-center text-muted-foreground mt-4">
