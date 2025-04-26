@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cart";
-import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 export const Summary = () => {
   const total = useCartStore((state) => state.getSummary().total);
@@ -40,7 +40,7 @@ export const Summary = () => {
             <Button
               className="w-full"
               size="lg"
-              onClick={() => toast("Proximamente...")}
+              onClick={() => redirect("/checkout")}
             >
               Comprar
             </Button>
