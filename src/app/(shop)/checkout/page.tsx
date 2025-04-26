@@ -6,56 +6,13 @@ import Link from "next/link";
 import { CheckCircle2, ArrowLeft, HistoryIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Type for order details
-interface OrderItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-interface OrderDetails {
-  orderId: string;
-  date: string;
-  total: number;
-  subtotal: number;
-  tax: number;
-  discount: number;
-  items: OrderItem[];
-  shippingAddress: string;
-  paymentMethod: string;
-}
 export default function PurchaseConfirmationPage() {
   const searchParams = useSearchParams();
-  const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // In a real application, you might fetch order details from an API
-    // using the order ID from the URL params
-    const orderId = searchParams.get("orderId");
-
-    // For demo purposes, we'll simulate loading order details
     const loadOrderDetails = () => {
-      // Simulate API call delay
       setTimeout(() => {
-        // Create sample order details (in a real app, this would come from the backend)
-        const orderData: OrderDetails = {
-          orderId: orderId || `ORD-${Math.floor(Math.random() * 10000)}`,
-          date: new Date().toISOString(),
-          total: Number.parseFloat(searchParams.get("total") || "0"),
-          subtotal: Number.parseFloat(searchParams.get("subtotal") || "0"),
-          tax: Number.parseFloat(searchParams.get("tax") || "0"),
-          discount: Number.parseFloat(searchParams.get("discount") || "0"),
-          items: JSON.parse(
-            decodeURIComponent(searchParams.get("items") || "[]")
-          ),
-          shippingAddress: "Calle Ejemplo, 123, 28001 Madrid, España",
-          paymentMethod: "Tarjeta terminada en 4242",
-        };
-
-        setOrderDetails(orderData);
         setIsLoading(false);
       }, 500);
     };
