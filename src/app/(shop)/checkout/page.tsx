@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle2, ArrowLeft, HistoryIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function PurchaseConfirmationPage() {
-  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +16,7 @@ export default function PurchaseConfirmationPage() {
     };
 
     loadOrderDetails();
-  }, [searchParams]);
+  }, []);
 
   if (isLoading) {
     return (
