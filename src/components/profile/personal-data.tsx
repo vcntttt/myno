@@ -1,3 +1,4 @@
+"use client";
 import { user } from "@/lib/data/user";
 import {
   Card,
@@ -10,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export const PersonalData = () => {
   return (
@@ -49,7 +51,9 @@ export const PersonalData = () => {
         </div>
       </CardContent>
       <CardFooter>
-        <Button>Guardar Cambios</Button>
+        <Button onClick={() => toast("Proximamente...")}>
+          Guardar Cambios
+        </Button>
       </CardFooter>
     </Card>
   );

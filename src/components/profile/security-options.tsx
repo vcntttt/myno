@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -9,9 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export const SecurityOptions = () => {
-  const isGoogleAccount = true;
+  const isGoogleAccount = false;
 
   return (
     <>
@@ -89,7 +91,9 @@ export const SecurityOptions = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Actualizar Contraseña</Button>
+            <Button onClick={() => toast("Proximamente...")}>
+              Actualizar Contraseña
+            </Button>
           </CardFooter>
         </Card>
       )}
