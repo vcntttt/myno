@@ -1,4 +1,4 @@
-import { user } from "@/lib/data/user";
+"use client";
 import {
   Card,
   CardContent,
@@ -10,8 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useUserStore } from "@/store/user";
 
 export const PersonalData = () => {
+  const user = useUserStore((state) => state.user);
   return (
     <Card>
       <CardHeader>
@@ -22,34 +25,36 @@ export const PersonalData = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="firstName">Nombre</Label>
-            <Input id="firstName" defaultValue={user.firstName} />
+            <Input id="firstName" />
           </div>
           <div className="space-y-2">
             <Label htmlFor="lastName">Apellido</Label>
-            <Input id="lastName" defaultValue={user.lastName} />
+            <Input id="lastName" />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="email">Correo electrónico</Label>
-            <Input id="email" type="email" defaultValue={user.email} />
+            <Input id="email" type="email" defaultValue={user?.email} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="company">Compañia</Label>
-            <Input id="company" type="company" defaultValue={user.company} />
+            <Input id="company" type="company" />
           </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="phone">Teléfono</Label>
-          <Input id="phone" type="tel" defaultValue={user.phone} />
+          <Input id="phone" type="tel" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="address">Dirección</Label>
-          <Input id="address" defaultValue={user.address} />
+          <Input id="address" />
         </div>
       </CardContent>
       <CardFooter>
-        <Button>Guardar Cambios</Button>
+        <Button onClick={() => toast("Proximamente...")}>
+          Guardar Cambios
+        </Button>
       </CardFooter>
     </Card>
   );

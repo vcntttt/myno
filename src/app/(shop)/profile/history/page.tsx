@@ -12,8 +12,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { PurchaseStatus } from "@/types/purchase";
+import { useUserStore } from "@/store/user";
+import Link from "next/link";
 
 export default function HistoryPage() {
+  const user = useUserStore((state) => state.user);
+
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -83,6 +87,21 @@ export default function HistoryPage() {
     setDateRange({ from: undefined, to: undefined });
     setSelectedStatuses([]);
   }, []);
+
+  if (!user) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className="text-2xl font-bold">No estás autenticado</h1>
+        <p className="text-sm text-muted-foreground">
+          Por favor,{" "}
+          <Link href="/auth/login" className="underline">
+            <span className="dark:text-orange-200/90">iniciar sesión </span>
+          </Link>{" "}
+          para acceder a tu perfil.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>

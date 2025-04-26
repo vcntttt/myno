@@ -2,16 +2,31 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { useUserStore } from "@/store/user";
+import { redirect } from "next/navigation";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [loading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  // const [rememberMe, setRememberMe] = useState(false);
+  const login = useUserStore((state) => state.login);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Por favor, completa todos los campos.");
+      return;
+    }
+    if (loading) return;
+    login(email);
+    redirect("/");
+  };
 
   return (
     <div className="grid gap-4">
@@ -29,7 +44,7 @@ export const LoginForm = () => {
         />
       </div>
 
-      <div className="grid gap-2">
+      {/* <div className="grid gap-2">
         <div className="flex items-center">
           <Label htmlFor="password">Contraseña</Label>
         </div>
@@ -42,9 +57,9 @@ export const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
+      </div> */}
 
-      <div className="flex items-center gap-2">
+      {/* <div className="flex items-center gap-2">
         <Checkbox
           id="remember"
           onClick={() => {
@@ -52,13 +67,13 @@ export const LoginForm = () => {
           }}
         />
         <Label htmlFor="remember">Recordarme</Label>
-      </div>
+      </div> */}
 
       <Button
         type="submit"
         className="w-full"
         disabled={loading}
-        onClick={() => {}}
+        onClick={handleSubmit}
       >
         {loading ? (
           <Loader2 size={16} className="animate-spin" />
@@ -67,7 +82,7 @@ export const LoginForm = () => {
         )}
       </Button>
 
-      <div
+      {/* <div
         className={cn(
           "w-full gap-2 flex items-center",
           "justify-between flex-col"
@@ -77,7 +92,9 @@ export const LoginForm = () => {
           variant="outline"
           className={cn("w-full gap-2")}
           disabled={loading}
-          onClick={() => {}}
+          onClick={() => {
+            toast.error("Funcionalidad no disponible aún");
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +121,7 @@ export const LoginForm = () => {
           </svg>
           Inicia sesión con Google
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

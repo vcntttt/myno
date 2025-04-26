@@ -16,10 +16,18 @@ import { Logo } from "@/components/logo";
 import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 import { ShoppingCartButton } from "./shopping-cart";
 import { SearchBar } from "./search";
-import { user } from "@/lib/data/user";
+import { useUserStore } from "@/store/user";
+import { redirect } from "next/navigation";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // es para mobile
+  const user = useUserStore((state) => state.user);
+  const logout = useUserStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout();
+    redirect("/");
+  };
 
   return (
     <header
@@ -75,7 +83,9 @@ export default function Header() {
                   <Link href="/profile/history">Historial</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Cerrar Sesión</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
+                  Cerrar Sesión
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
