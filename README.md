@@ -2,34 +2,35 @@
 
 ## Descripción
 
-Myno es una plataforma web B2B que conecta proveedores con pequeñas y medianas empresas (especialmente minimarkets), facilitando la compra de productos esenciales. Gracias a algoritmos de machine learning, analiza el historial de compras de cada cliente para ofrecer recomendaciones de productos similares o complementarios. Su interfaz intuitiva y enfoque basado en datos ayuda a optimizar inventarios, descubrir nuevas oportunidades de venta y digitalizar la cadena de suministro con insights accionables.
+Myno es una aplicación web fullstack desarrollada con Next.js. Funciona como un ecommerce personalizado que sugiere productos basados en el historial de compras de cada usuario; la página principal muestra recomendaciones preparadas exclusivamente para ti, aumentando la afinidad y las ventas.
 
 ## Tecnologías
 
-- **Next.js**
+- **Next.js 15** (App Router)
 - **TypeScript**
-- **Nuqs**
+- **Bun** (gestor de paquetes y runtime)
 - **Tailwind CSS**
+- **tRPC** y **React Query** (comunicación tipada y fetch de datos)
+- **Zustand** (gestión de estado global)
 
-## Instalación
+## Instalación y ejecución
 
-1. Clona este repositorio
-
+1. Clona este repositorio:
    ```bash
    git clone https://github.com/vcntttt/myno.git
    ```
-
-2. Instala dependencias
-
+2. Entra en la carpeta del proyecto e instala las dependencias:
    ```bash
    cd myno
    bun install
    ```
-
-3. Ejecuta el servidor de desarrollo
-
+3. Ejecuta el servidor de desarrollo:
    ```bash
    bun run dev
    ```
+4. Abre tu navegador en `http://localhost:3000` para ver la aplicación.
 
-4. Accede a la aplicación en `http://localhost:3000`
+## Enlaces
+
+- **Repositorio:** https://github.com/vcntttt/myno
+- **Demo en Vercel:** https://myno-vr.vercel.app/
