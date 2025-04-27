@@ -4,11 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cart";
+import { useUserStore } from "@/store/user";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 export const Summary = () => {
   const total = useCartStore((state) => state.getSummary().total);
   const subTotal = useCartStore((state) => state.getSummary().subTotal);
   const tax = useCartStore((state) => state.getSummary().tax);
+  const clearCart = useCartStore((state) => state.clearCart);
+  const user = useUserStore((state) => state.user);
+
+  const handleCheckout = () => {
+    if (!user) {
+      toast.error("Por favor, inicia sesión para realizar el pago.");
+      return;
+    }
+
+    clearCart();
+    redirect("/checkout");
+  };
 
   return (
     <div>
@@ -36,8 +51,8 @@ export const Summary = () => {
           </div>
 
           <div className="pt-4">
-            <Button className="w-full" size="lg">
-              Proceder al pago
+            <Button className="w-full" size="lg" onClick={handleCheckout}>
+              Comprar
             </Button>
 
             <p className="text-xs text-center text-muted-foreground mt-4">

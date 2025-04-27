@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components/products/product-card";
-import { recommendations } from "@/data/products";
+import { recommendations } from "@/lib/data/products";
 
 export default function Home() {
   return (

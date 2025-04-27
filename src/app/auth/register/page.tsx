@@ -10,6 +10,8 @@ import Link from "next/link";
 import { RegisterForm } from "@/components/auth/register-form";
 import type { Metadata } from "next";
 import { Logo } from "@/components/logo";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Info } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Crea una nueva cuenta | Myno Tienda Mayorista",
@@ -39,7 +41,20 @@ export default function RegisterPage() {
         </div>
         Myno
       </Link>
-      <Card className="z-50 rounded-md rounded-t-none max-w-md">
+      <Alert className="max-w-md rounded-md">
+        <Info className="h-4 w-4" />
+        <AlertTitle>Atención</AlertTitle>
+        <AlertDescription>
+          <p className=" w-full">
+            Aún no está disponible la opción de registro. Por el momento puede{" "}
+            <Link href="/auth/login" className="underline">
+              <span className="dark:text-orange-200/90">iniciar sesión </span>
+            </Link>
+            de manera simulada.
+          </p>
+        </AlertDescription>
+      </Alert>
+      <Card className="z-50 rounded-md max-w-md">
         <CardHeader>
           <CardTitle className="text-lg md:text-xl">Registro</CardTitle>
           <CardDescription className="text-xs md:text-sm">
