@@ -12,7 +12,6 @@ export const Summary = () => {
   const total = useCartStore((state) => state.getSummary().total);
   const subTotal = useCartStore((state) => state.getSummary().subTotal);
   const tax = useCartStore((state) => state.getSummary().tax);
-  const clearCart = useCartStore((state) => state.clearCart);
   const user = useUserStore((state) => state.user);
 
   const handleCheckout = () => {
@@ -21,7 +20,6 @@ export const Summary = () => {
       return;
     }
 
-    clearCart();
     redirect("/checkout");
   };
 

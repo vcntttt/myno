@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, ArrowLeft, HistoryIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/store/cart";
 
 export default function PurchaseConfirmationPage() {
   const [isLoading, setIsLoading] = useState(true);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
+    clearCart();
     const loadOrderDetails = () => {
       setTimeout(() => {
         setIsLoading(false);
@@ -16,7 +19,7 @@ export default function PurchaseConfirmationPage() {
     };
 
     loadOrderDetails();
-  }, []);
+  }, [clearCart]);
 
   if (isLoading) {
     return (
@@ -54,7 +57,7 @@ export default function PurchaseConfirmationPage() {
           </Link>
         </Button>
         <Button variant="outline" asChild className="flex-1">
-          <Link href="/">
+          <Link href="/profile/history">
             <HistoryIcon className="mr-2 h-4 w-4" />
             Ver Historial
           </Link>
