@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 // import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-// import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils/cn";
 import { toast } from "sonner";
 import { useUserStore } from "@/store/user";
 import { redirect } from "next/navigation";

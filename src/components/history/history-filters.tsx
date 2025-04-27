@@ -25,7 +25,7 @@ import { Label } from "@/components/ui/label";
 import { CalendarIcon, FilterX, SlidersHorizontal, X } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 import type { PurchaseStatus } from "@/types/purchase";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { getStatusLabel } from "@/lib/utils/purchase-status";

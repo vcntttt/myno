@@ -15,7 +15,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { PurchaseDetails } from "@/components/history/purchase-details";
 import { Checkbox } from "@/components/ui/checkbox";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils/price";
 import { getStatusLabel, getStatusVariant } from "@/lib/utils/purchase-status";
 
 // Define columns for the data table

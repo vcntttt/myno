@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils/price";
 import defaultIMG from "@/assets/logo.png";
 import { Product } from "@/types/products";
 import Link from "next/link";

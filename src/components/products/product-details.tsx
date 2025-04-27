@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import type { Product } from "@/types/products";
 import { ProductCard } from "@/components/products/product-card";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils/price";
 import { useCartStore } from "@/store/cart";
 import { toast } from "sonner";
 
