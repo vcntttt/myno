@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Search, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,7 +48,9 @@ export default function Header() {
               <ShoppingCartButton />
             </Link>
           </Button>
-          <SearchBar />
+          <div className="items-center hidden md:flex">
+            <SearchBar />
+          </div>
 
           {/* Mobile Search Toggle */}
           <div className="flex md:hidden">
@@ -109,17 +110,7 @@ export default function Header() {
       {/* Mobile Search Bar (Conditional) */}
       {isSearchOpen && (
         <div className="p-2 border-b md:hidden">
-          <div className="relative flex items-center">
-            <Input
-              type="search"
-              placeholder="Buscador"
-              className="h-9 w-full"
-              autoFocus
-            />
-            <Button size="sm" variant="ghost" className="absolute right-0">
-              <Search className="w-4 h-4" />
-            </Button>
-          </div>
+          <SearchBar />
         </div>
       )}
     </header>
