@@ -1,9 +1,6 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { ProductDetail } from "@/components/products/product-details";
 import products from "@/lib/data/products.json";
-import { Suspense } from "react";
-import { SkeletonProductDetail } from "@/components/products/product-details-skeleton";
 
 interface Props {
   params: Promise<{
@@ -39,14 +36,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-
-  if (!products.some((p) => p.slug === slug)) {
-    notFound();
-  }
-
-  return (
-    <Suspense fallback={<SkeletonProductDetail />}>
-      <ProductDetail slug={slug} />
-    </Suspense>
-  );
+  return <ProductDetail slug={slug} />;
 }

@@ -16,8 +16,8 @@ import type { Product } from "@/types/products";
 import { ProductGrid } from "./product-grid";
 
 export function ProductDetail({ slug }: { slug: string }) {
-  const { data: product } = useProductBySlug(slug);
   const { data: all } = useProducts();
+  const { data: product } = useProductBySlug(slug);
 
   if (!product) {
     notFound();
