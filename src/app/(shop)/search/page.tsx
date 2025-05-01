@@ -25,13 +25,17 @@ import {
   SheetClose,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { categories } from "@/lib/data/categories";
-import { recommendations as products } from "@/lib/data/products";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { ProductCard } from "@/components/products/product-card";
 import { ProductCardList } from "@/components/products/product-card-list";
+import { useCategories } from "@/hooks/query/categories";
+import { useProducts } from "@/hooks/query/products";
+import { SearchPageSkeleton } from "@/components/search/search-page-skeleton";
 
 function RealSearchPage() {
+  const { data: categories } = useCategories();
+  const { data: products } = useProducts();
+
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [viewMode, setViewMode] = useQueryState("viewMode", {
     defaultValue: "grid",
@@ -274,7 +278,7 @@ function RealSearchPage() {
 
 export default function SearchPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<SearchPageSkeleton />}>
       <RealSearchPage />
     </Suspense>
   );
