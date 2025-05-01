@@ -2,7 +2,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { DataTable } from "@/components/history/data-table";
 import { columns } from "@/components/history/columns";
-import { purchaseData } from "@/lib/data/purchase-history";
 import { HistoryFilters } from "@/components/history/history-filters";
 import {
   Card,
@@ -11,9 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { PurchaseStatus } from "@/types/purchase";
+import type { Purchase, PurchaseStatus } from "@/types/purchase";
 import { useUserStore } from "@/store/user";
 import Link from "next/link";
+const purchaseData = [] as Purchase[];
 
 export default function HistoryPage() {
   const user = useUserStore((state) => state.user);

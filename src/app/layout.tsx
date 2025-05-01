@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "@/components/ui/sonner";
+import { ReactQueryProvider } from "@/lib/query-provider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,8 +30,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NuqsAdapter>
-            {children}
-            <Toaster />
+            <ReactQueryProvider>
+              {children}
+              <Toaster />
+            </ReactQueryProvider>
           </NuqsAdapter>
         </ThemeProvider>
       </body>

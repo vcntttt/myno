@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "50x Manzanas",
+    "price": 40,
+    "slug": "50x-manzanas",
+    "categoria": "Frutas",
+    "description": "Caja de 50 manzanas frescas de calidad premium, ideal para minimarkets, fruterías y venta a granel.",
+    "image": "manzanas"
+  },
+  {
+    "id": 2,
+    "name": "50x Pepsi",
+    "price": 50,
+    "slug": "50x-pepsi",
+    "categoria": "Bebidas",
+    "description": "Pack mayorista de 50 latas de Pepsi (350 ml c/u). Perfecto para tiendas, almacenes y eventos.",
+    "image": "pepsi"
+  },
+  {
+    "id": 3,
+    "name": "50x Coca Cola",
+    "price": 60,
+    "slug": "50x-coca-cola",
+    "categoria": "Bebidas",
+    "description": "Caja de 50 latas de Coca Cola (350 ml c/u). Presentación ideal para venta en tiendas y consumo masivo.",
+    "image": "cocacola"
+  },
+  {
+    "id": 4,
+    "name": "50x Lechugas",
+    "price": 30,
+    "slug": "50x-lechugas",
+    "categoria": "Verduras",
+    "description": "Pack de 50 lechugas frescas, listas para la venta directa en ferias, verdulerías o restaurantes.",
+    "image": "lechugas"
+  },
+  {
+    "id": 5,
+    "name": "50x Peras",
+    "price": 45,
+    "slug": "50x-peras",
+    "categoria": "Frutas",
+    "description": "Caja de 50 peras frescas de calidad premium, ideal para minimarkets, fruterías y venta a granel.",
+    "image": "peras"
+  },
+  {
+    "id": 6,
+    "name": "12x Mistral de Manzana",
+    "price": 70,
+    "slug": "mistral-de-manzana",
+    "categoria": "Bebidas",
+    "description": "Pack de 12 botellas de Mistral de Manzana, perfecto para tiendas especializadas y eventos.",
+    "image": "manzani"
+  },
+  {
+    "id": 7,
+    "name": "Pack de Huevos",
+    "price": 25,
+    "slug": "pack-huevos",
+    "categoria": "Alimentos",
+    "description": "Caja de 30 docenas de huevos frescos calibre XL, lista para la venta al por mayor.",
+    "image": "huevos"
+  },
+  {
+    "id": 8,
+    "name": "Givenchy Men",
+    "price": 120,
+    "slug": "givenchy-men",
+    "categoria": "Perfumes",
+    "description": "Pack de 12 unidades de perfume Givenchy Men, fragancia premium para tiendas especializadas.",
+    "image": "givenchy-men"
+  }
+]

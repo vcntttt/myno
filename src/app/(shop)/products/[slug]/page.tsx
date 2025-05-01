@@ -1,6 +1,6 @@
+import { Metadata } from "next";
 import { ProductDetail } from "@/components/products/product-details";
-import { recommendations } from "@/lib/data/products";
-import { notFound } from "next/navigation";
+import products from "@/lib/data/products.json";
 
 interface Props {
   params: Promise<{
@@ -8,46 +8,33 @@ interface Props {
   }>;
 }
 
-export async function generateStaticParams() {
-  return recommendations.map((product) => ({
-    slug: product.slug,
-  }));
+export function generateStaticParams() {
+  return products.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-
-  const product = recommendations.find((product) => product.slug === slug);
+  const product = products.find((p) => p.slug === slug);
   if (!product) return {};
 
   return {
     title: product.name,
     description: product.description,
-    images: [product.image.src],
     openGraph: {
       title: product.name,
       description: product.description,
-      images: [product.image.src],
+      images: [product.image],
     },
     twitter: {
+      card: "summary_large_image",
       title: product.name,
       description: product.description,
-      images: [
-        {
-          alt: product.name,
-          url: product.image.src,
-        },
-      ],
-      card: "summary_large_image",
+      images: [product.image],
     },
   };
 }
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-
-  const product = recommendations.find((product) => product.slug === slug);
-  if (!product) notFound();
-
-  return <ProductDetail product={product} relatedProducts={recommendations} />;
+  return <ProductDetail slug={slug} />;
 }
