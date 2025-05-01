@@ -1,10 +1,10 @@
 "use client";
 
-import { Recomendations } from "@/components/cart/recomendations";
 import { Summary } from "@/components/cart/summary";
 import { ProductsInCart } from "@/components/cart/products-in-cart";
 import { useCartStore } from "@/store/cart";
 import { EmptyCart } from "@/components/cart/empty-cart";
+import { ProductGrid } from "@/components/products/product-grid";
 
 export default function CartPage() {
   const totalItems = useCartStore((state) => state.getSummary().totalItems);
@@ -23,7 +23,8 @@ export default function CartPage() {
         <EmptyCart />
       )}
 
-      <Recomendations />
+      <h2 className="text-xl font-semibold mb-6">También te puede interesar</h2>
+      <ProductGrid />
     </>
   );
 }

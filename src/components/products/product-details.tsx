@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ClipboardCheck, Share2, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ProductCard } from "@/components/products/product-card";
 import { formatPrice } from "@/lib/utils/price";
 import { useCartStore } from "@/store/cart";
 import { toast } from "sonner";
@@ -14,6 +13,7 @@ import { useProductBySlug } from "@/hooks/query/product-by-slug";
 import { notFound } from "next/navigation";
 import { getImage } from "@/lib/utils/images";
 import type { Product } from "@/types/products";
+import { ProductGrid } from "./product-grid";
 
 export function ProductDetail({ slug }: { slug: string }) {
   const { data: product } = useProductBySlug(slug);
@@ -114,11 +114,7 @@ export function ProductDetail({ slug }: { slug: string }) {
       {relatedProducts.length > 0 && (
         <div>
           <h2 className="text-2xl font-bold mb-6">Productos relacionados</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {relatedProducts.map((p) => (
-              <ProductCard key={p.id} {...p} />
-            ))}
-          </div>
+          <ProductGrid />
         </div>
       )}
     </div>

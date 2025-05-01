@@ -12,6 +12,7 @@ import {
 import { useCartStore } from "@/store/cart";
 import Image from "next/image";
 import { QuantitySelector } from "./quantity-selector";
+import { getImage } from "@/lib/utils/images";
 
 export const ProductsInCart = () => {
   const {
@@ -36,7 +37,7 @@ export const ProductsInCart = () => {
               >
                 <div className="w-20 h-20 bg-muted rounded-md overflow-hidden flex-shrink-0">
                   <Image
-                    src={item.image}
+                    src={getImage(item.image)}
                     width={80}
                     height={80}
                     alt={item.name}
