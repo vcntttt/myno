@@ -8,9 +8,10 @@ Myno es una aplicación web fullstack desarrollada con Next.js. Funciona como un
 
 - **Next.js 15** (App Router)
 - **TypeScript**
-- **Bun** (gestor de paquetes y runtime)
+- **TanStack Query** (gestión de datos)
 - **Tailwind CSS**
 - **Zustand** (gestión de estado global)
+- **Bun** (gestor de paquetes y runtime)
 
 ## Instalación y ejecución
 
