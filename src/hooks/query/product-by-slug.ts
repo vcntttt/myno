@@ -1,5 +1,5 @@
 import { Product } from "@/types/products";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 async function getProductBySlug(slug: string): Promise<Product> {
   const res = await fetch(`/api/products/${slug}`);
@@ -8,7 +8,7 @@ async function getProductBySlug(slug: string): Promise<Product> {
 }
 
 export const useProductBySlug = (slug: string) => {
-  const { data, isLoading, error } = useSuspenseQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["product", slug],
     queryFn: () => getProductBySlug(slug),
   });

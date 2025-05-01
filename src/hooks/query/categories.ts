@@ -1,5 +1,5 @@
 import { Category } from "@/types/categories";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 async function getCategories() {
   const res = await fetch("/api/categories");
@@ -8,7 +8,7 @@ async function getCategories() {
 }
 
 export const useCategories = () => {
-  const { data, isLoading, error } = useSuspenseQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
   });
