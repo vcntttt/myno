@@ -1,5 +1,5 @@
 import { Product } from "@/types/products";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 async function getProducts() {
   const res = await fetch("/api/products");
@@ -8,7 +8,7 @@ async function getProducts() {
 }
 
 export const useProducts = () => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useSuspenseQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
