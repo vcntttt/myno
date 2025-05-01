@@ -6,7 +6,9 @@ import { Suspense } from "react";
 import { SkeletonProductDetail } from "@/components/products/product-details-skeleton";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
 export function generateStaticParams() {
@@ -14,7 +16,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = products.find((p) => p.slug === params.slug);
+  const { slug } = await params;
+  const product = products.find((p) => p.slug === slug);
   if (!product) return {};
 
   return {
