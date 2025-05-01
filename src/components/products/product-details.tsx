@@ -5,25 +5,30 @@ import Link from "next/link";
 import { ClipboardCheck, Share2, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import type { Product } from "@/types/products";
 import { ProductCard } from "@/components/products/product-card";
 import { formatPrice } from "@/lib/utils/price";
 import { useCartStore } from "@/store/cart";
 import { toast } from "sonner";
+import { useProducts } from "@/hooks/query/products";
+import { useProductBySlug } from "@/hooks/query/product-by-slug";
+import { notFound } from "next/navigation";
+import { getImage } from "@/lib/utils/images";
+import type { Product } from "@/types/products";
 
-interface ProductDetailProps {
-  product: Product;
-  relatedProducts: Product[];
-}
+export function ProductDetail({ slug }: { slug: string }) {
+  const { data: product } = useProductBySlug(slug);
+  const { data: all } = useProducts();
 
-export function ProductDetail({
-  product,
-  relatedProducts,
-}: ProductDetailProps) {
+  if (!product) {
+    notFound();
+  }
+
+  const relatedProducts = (all ?? []).filter((p: Product) => p.slug !== slug);
   const addToCart = useCartStore((state) => state.addToCart);
 
   const handleAddToCart = () => {
     addToCart({ ...product, quantity: 1 });
+    toast.success("Producto agregado al carrito");
   };
 
   return (
@@ -53,23 +58,14 @@ export function ProductDetail({
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-        <div className="space-y-4">
-          <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="flex items-center justify-center text-muted-foreground">
-                {product.image ? (
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  "Imagen del producto"
-                )}
-              </div>
-            </div>
-          </div>
+        {/* Image */}
+        <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
+          <Image
+            src={getImage(product.image)}
+            alt={product.name}
+            fill
+            className="object-cover"
+          />
         </div>
 
         {/* Product Info */}
@@ -119,8 +115,8 @@ export function ProductDetail({
         <div>
           <h2 className="text-2xl font-bold mb-6">Productos relacionados</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {relatedProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
+            {relatedProducts.map((p) => (
+              <ProductCard key={p.id} {...p} />
             ))}
           </div>
         </div>
