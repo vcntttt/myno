@@ -13,10 +13,10 @@ import {
 import type { Purchase, PurchaseStatus } from "@/types/purchase";
 import { useUserStore } from "@/store/user";
 import Link from "next/link";
+const purchaseData = [] as Purchase[];
 
 export default function HistoryPage() {
   const user = useUserStore((state) => state.user);
-  const purchaseData = [] as Purchase[];
 
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
