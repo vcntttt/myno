@@ -217,12 +217,12 @@
   },
   {
     "id": 25,
-    "name": "20x Pasta",
+    "name": "20x tallarines",
     "price": 45000,
-    "slug": "20x-pasta",
+    "slug": "20x-tallarines",
     "categoria": "Alimentos",
-    "description": "Pack de 20 paquetes de pasta seca (500 g c/u), variedad espirales.",
-    "image": "pasta"
+    "description": "Pack de 20 paquetes de tallarines seca (500 g c/u), variedad espirales.",
+    "image": "tallarines"
   },
   {
     "id": 26,
