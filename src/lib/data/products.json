@@ -108,15 +108,6 @@
     "image": "mangos"
   },
   {
-    "id": 13,
-    "name": "50x Kiwis",
-    "price": 48000,
-    "slug": "50x-kiwis",
-    "categoria": "Frutas",
-    "description": "Caja de 50 kiwis verdes, ricos en vitamina C.",
-    "image": "kiwis"
-  },
-  {
     "id": 14,
     "name": "50x Tomates",
     "price": 22000,
@@ -142,24 +133,6 @@
     "categoria": "Verduras",
     "description": "Pack de 50 zanahorias naranjas, perfectas para jugos y guisos.",
     "image": "zanahorias"
-  },
-  {
-    "id": 17,
-    "name": "50x Pimientos",
-    "price": 30000,
-    "slug": "50x-pimientos",
-    "categoria": "Verduras",
-    "description": "Caja de 50 pimientos variados (rojos, verdes, amarillos).",
-    "image": "pimientos"
-  },
-  {
-    "id": 18,
-    "name": "50x Cebollas",
-    "price": 17000,
-    "slug": "50x-cebollas",
-    "categoria": "Verduras",
-    "description": "Pack de 50 cebollas blancas, suavemente dulces.",
-    "image": "cebollas"
   },
   {
     "id": 19,
