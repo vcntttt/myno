@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { formatPrice } from "@/lib/utils/price";
-import defaultIMG from "@/assets/logo.png";
 import { Product } from "@/types/products";
 import Link from "next/link";
 import { getImage } from "@/lib/utils/images";
@@ -22,7 +21,7 @@ export const ProductCardList = ({
       <Card>
         <div className="flex flex-col sm:flex-row">
           <Image
-            src={getImage(image) ?? defaultIMG}
+            src={getImage(image)}
             alt="Product Image"
             width={150}
             height={150}

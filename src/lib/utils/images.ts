@@ -7,6 +7,7 @@ import peras from "@/assets/peras.png";
 import manzani from "@/assets/manzani.png";
 import huevos from "@/assets/huevos.png";
 import givenchyMen from "@/assets/givenchy-men.png";
+import defaultImg from "@/assets/placeholder.png";
 
 const imageMap: Record<string, StaticImageData> = {
   manzanas,
@@ -20,5 +21,5 @@ const imageMap: Record<string, StaticImageData> = {
 };
 
 export function getImage(image: string) {
-  return imageMap[image];
+  return imageMap[image] ?? defaultImg;
 }
