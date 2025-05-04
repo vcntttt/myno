@@ -1,22 +1,8 @@
 "use client";
-import { useMemo, useState } from "react";
+
+import { useState } from "react";
 import { Search, SlidersHorizontal, Grid, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import {
   Sheet,
   SheetContent,
@@ -24,214 +10,157 @@ import {
   SheetClose,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
-import { ProductCard } from "@/components/products/product-card";
-import { ProductCardList } from "@/components/products/product-card-list";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useCategories } from "@/hooks/query/categories";
 import { useProducts } from "@/hooks/query/products";
+import { useSearchFilters } from "@/hooks/use-search";
+import { FilterSidebar } from "@/components/search/filters";
+import { SearchFiltersSkeleton } from "@/components/search/filters-skeleton";
+import { SearchPageSkeleton } from "@/components/search/search-page-skeleton";
+import { ProductCard } from "@/components/products/product-card";
+import { ProductCardList } from "@/components/products/product-card-list";
+import { SkeletonProductGrid } from "@/components/products/product-grid-skeleton";
 
 export function ClientSearchPage() {
-  const { data: cdata } = useCategories();
-  const { data: pdata } = useProducts();
+  const { data: categories = [], isLoading: catLoading } = useCategories();
+  const { data: products = [], isLoading: prodLoading } = useProducts();
+
+  const {
+    viewMode,
+    setViewMode,
+    sortBy,
+    setSortBy,
+    selectedCategories,
+    onToggleCategory,
+    clearFilters,
+    totalItems,
+    resultsCount,
+    sortedProducts,
+  } = useSearchFilters(products);
 
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-  const [viewMode, setViewMode] = useQueryState("viewMode", {
-    defaultValue: "grid",
-    clearOnDefault: false,
-  });
-  const [sortBy, setSortBy] = useQueryState("sortBy", {
-    defaultValue: "relevance",
-    clearOnDefault: false,
-  });
-  const [selectedCategories = [], setSelectedCategories] = useQueryState<
-    string[]
-  >("selectedCategories", parseAsArrayOf(parseAsString).withDefault([]));
 
-  const [searchQuery = ""] = useQueryState("query", {
-    defaultValue: "",
-    clearOnDefault: false,
-  });
-
-  function clearFilters() {
-    setSelectedCategories([]);
+  // Render completo skeleton si ambos cargan
+  if (catLoading && prodLoading) {
+    return <SearchPageSkeleton />;
   }
-  const categories = cdata ?? [];
-  const products = pdata ?? [];
-  const totalItems = products?.length ?? 0;
-  const filteredProducts = products.filter((product) => {
-    if (
-      selectedCategories?.length > 0 &&
-      !selectedCategories.includes(
-        product.categoria.toLowerCase().replace(/\s+/g, "-")
-      )
-    ) {
-      return false;
-    }
 
-    if (searchQuery) {
-      const term = searchQuery.toLowerCase();
-      if (
-        !product.name.toLowerCase().includes(term) &&
-        !product.description?.toLowerCase().includes(term)
-      ) {
-        return false;
-      }
-    }
+  // Sidebar diferido
+  const sidebar = catLoading ? (
+    <SearchFiltersSkeleton />
+  ) : (
+    <FilterSidebar
+      categories={categories}
+      selectedCategories={selectedCategories}
+      onToggleCategory={onToggleCategory}
+    />
+  );
 
-    return true;
-  });
-  const resultsCount = filteredProducts?.length;
-
-  const sortedProducts = useMemo(() => {
-    switch (sortBy) {
-      case "price-asc":
-        return [...filteredProducts].sort((a, b) => a.price - b.price);
-      case "price-desc":
-        return [...filteredProducts].sort((a, b) => b.price - a.price);
-      default:
-        return filteredProducts;
-    }
-  }, [filteredProducts, sortBy]);
-
-  const FiltersComponent = () => (
-    <div className="space-y-6">
-      <Accordion type="single" collapsible defaultValue="categories">
-        <AccordionItem value="categories">
-          <AccordionTrigger className="text-base font-medium">
-            Categorías
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-2">
-              {categories.map((category) => (
-                <div key={category.id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`category-${category.id}`}
-                    checked={selectedCategories?.includes(category.id)}
-                    onCheckedChange={(checked) => {
-                      if (checked) {
-                        setSelectedCategories([
-                          ...selectedCategories,
-                          category.id,
-                        ]);
-                      } else {
-                        setSelectedCategories(
-                          selectedCategories.filter((c) => c !== category.id)
-                        );
-                      }
-                    }}
-                  />
-                  <Label
-                    htmlFor={`category-${category.id}`}
-                    className="flex-1 text-sm cursor-pointer"
-                  >
-                    {category.name} ( {category.count} )
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+  // Área de resultados diferida
+  const resultsArea = prodLoading ? (
+    <SkeletonProductGrid />
+  ) : sortedProducts.length === 0 ? (
+    <div className="flex flex-col items-center py-16 text-center">
+      <Search className="h-12 w-12 text-muted-foreground mb-4" />
+      <h2 className="text-xl font-semibold mb-2">
+        No se encontraron resultados
+      </h2>
+      <Button variant="outline" onClick={clearFilters}>
+        Limpiar filtros
+      </Button>
+    </div>
+  ) : viewMode === "grid" ? (
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      {sortedProducts.map((p) => (
+        <ProductCard key={p.id} {...p} />
+      ))}
+    </div>
+  ) : (
+    <div className="space-y-4">
+      {sortedProducts.map((p) => (
+        <ProductCardList key={p.id} {...p} />
+      ))}
     </div>
   );
 
   return (
     <>
-      <div className="mb-8">
-        <div className="flex gap-2">
-          <Sheet
-            open={isMobileFiltersOpen}
-            onOpenChange={setIsMobileFiltersOpen}
-          >
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                className="gap-2 md:hidden"
-                aria-label="Filtros"
-              >
-                <SlidersHorizontal className="w-4 h-4" />
-                Filtros
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[350px] p-4">
-              <div className="py-4">
-                <div className="flex items-center justify-between mb-6">
-                  <SheetTitle>Filtros</SheetTitle>
-                  <Button variant="ghost" size="sm" onClick={clearFilters}>
-                    Limpiar todo
-                  </Button>
-                </div>
-                <FiltersComponent />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-background">
-                <SheetClose asChild>
-                  <Button className="w-full">
-                    Ver {resultsCount} resultados
-                  </Button>
-                </SheetClose>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="hidden md:block w-64 flex-shrink-0">
-          <div className="sticky top-24">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold">Filtros</h2>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={clearFilters}
-                className="h-8 text-sm"
-              >
+      {/* Mobile Filters */}
+      <div className="mb-8 flex gap-2 md:hidden">
+        <Sheet open={isMobileFiltersOpen} onOpenChange={setIsMobileFiltersOpen}>
+          <SheetTrigger asChild>
+            <Button variant="outline" aria-label="Filtros" className="gap-2">
+              <SlidersHorizontal className="w-4 h-4" /> Filtros
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-64 p-4">
+            <div className="flex items-center justify-between mb-4">
+              <SheetTitle>Filtros</SheetTitle>
+              <Button variant="ghost" size="sm" onClick={clearFilters}>
                 Limpiar
               </Button>
             </div>
-            <FiltersComponent />
-          </div>
-        </div>
-
-        <div className="flex-1">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-            <div>
-              <p className="text-sm text-muted-foreground">
-                Mostrando {resultsCount} de {totalItems} resultados
-              </p>
+            {sidebar}
+            <div className="mt-4">
+              <SheetClose asChild>
+                <Button className="w-full">
+                  Ver {resultsCount} resultados
+                </Button>
+              </SheetClose>
             </div>
-            <div className="flex items-center gap-4 w-full sm:w-auto">
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      {/* Desktop layout */}
+      <div className="flex flex-col md:flex-row gap-8">
+        <aside className="hidden md:block w-64 sticky top-24">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold">Filtros</h2>
+            <Button variant="ghost" size="sm" onClick={clearFilters}>
+              Limpiar
+            </Button>
+          </div>
+          {sidebar}
+        </aside>
+
+        <main className="flex-1 space-y-6">
+          {/* Header controls */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <p className="text-sm text-muted-foreground">
+              Mostrando {resultsCount} de {totalItems} resultados
+            </p>
+            <div className="flex items-center gap-4">
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-full sm:w-[180px]">
+                <SelectTrigger className="w-36">
                   <SelectValue placeholder="Ordenar por" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="relevance">Relevancia</SelectItem>
-                  <SelectItem value="price-asc">
-                    Precio: menor a mayor
-                  </SelectItem>
+                  <SelectItem value="price-asc">Precio: Bajo a Alto</SelectItem>
                   <SelectItem value="price-desc">
-                    Precio: mayor a menor
+                    Precio: Alto a Bajo
                   </SelectItem>
-                  {/* <SelectItem value="newest">Más recientes</SelectItem> */}
                 </SelectContent>
               </Select>
               <div className="flex border rounded-md">
                 <Button
                   variant={viewMode === "grid" ? "default" : "ghost"}
                   size="icon"
-                  className="rounded-none rounded-l-md"
                   onClick={() => setViewMode("grid")}
-                  aria-label="Vista de cuadrícula"
                 >
                   <Grid className="h-4 w-4" />
                 </Button>
                 <Button
                   variant={viewMode === "list" ? "default" : "ghost"}
                   size="icon"
-                  className="rounded-none rounded-r-md"
                   onClick={() => setViewMode("list")}
-                  aria-label="Vista de lista"
                 >
                   <List className="h-4 w-4" />
                 </Button>
@@ -239,37 +168,8 @@ export function ClientSearchPage() {
             </div>
           </div>
 
-          {sortedProducts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center">
-              <Search className="h-12 w-12 text-muted-foreground mb-4" />
-              <h2 className="text-xl font-semibold mb-2">
-                No se encontraron resultados
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Intenta con otros términos de búsqueda o ajusta los filtros
-              </p>
-              <Button variant="outline" onClick={clearFilters}>
-                Limpiar filtros
-              </Button>
-            </div>
-          ) : (
-            <>
-              {viewMode === "grid" ? (
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                  {sortedProducts.map((product) => (
-                    <ProductCard key={product.id} {...product} />
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {sortedProducts.map((product) => (
-                    <ProductCardList key={product.id} {...product} />
-                  ))}
-                </div>
-              )}
-            </>
-          )}
-        </div>
+          {resultsArea}
+        </main>
       </div>
     </>
   );
