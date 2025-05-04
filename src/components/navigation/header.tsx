@@ -17,11 +17,14 @@ import { ShoppingCartButton } from "./shopping-cart";
 import { SearchBar } from "./search";
 import { useUserStore } from "@/store/user";
 import { redirect } from "next/navigation";
+import { useMounted } from "@/hooks/use-mounted";
+import { UserZoneSkeleton } from "@/components/navigation/user-zone-skeleton";
 
 export default function Header() {
-  const [isSearchOpen, setIsSearchOpen] = useState(false); // es para mobile
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
+  const mounted = useMounted();
 
   const handleLogout = () => {
     logout();
@@ -35,20 +38,22 @@ export default function Header() {
       <div className="container max-w-7xl flex items-center justify-between h-16 px-4 mx-auto">
         <Link
           href="/"
-          className="text-xl font-semibold flex items-center gap-x-2"
+          className="flex items-center gap-2 text-xl font-semibold"
         >
           <Logo />
           Myno
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="flex items-center gap-2">
+          {/* Carrito */}
           <Button variant="ghost" asChild size="icon" aria-label="Carrito">
             <Link href={`/cart`}>
               <ShoppingCartButton />
             </Link>
           </Button>
-          <div className="items-center hidden md:flex">
+
+          {/* Desktop Search */}
+          <div className="hidden md:flex">
             <SearchBar />
           </div>
 
@@ -68,8 +73,10 @@ export default function Header() {
             </Button>
           </div>
 
-          {/* Profile Dropdown */}
-          {user ? (
+          {/* Zona de usuario */}
+          {!mounted ? (
+            <UserZoneSkeleton />
+          ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" aria-label="Perfil">
@@ -96,20 +103,21 @@ export default function Header() {
               </Button>
               <Button
                 asChild
-                aria-label="Iniciar Sesión"
                 className="hidden md:inline-flex"
+                aria-label="Registro"
               >
                 <Link href="/auth/register">Registro</Link>
               </Button>
             </>
           )}
+
           <ThemeSwitcher />
         </div>
       </div>
 
-      {/* Mobile Search Bar (Conditional) */}
+      {/* Mobile Search */}
       {isSearchOpen && (
-        <div className="p-2 border-b md:hidden">
+        <div className="border-b p-2 md:hidden">
           <SearchBar />
         </div>
       )}
