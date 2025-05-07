@@ -9,6 +9,7 @@ import { useCartStore } from "@/store/cart";
 import { useUserStore } from "@/store/user";
 import { Purchase } from "@/types/purchase";
 import { redirect } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export const Summary = () => {
@@ -19,12 +20,14 @@ export const Summary = () => {
   const cart = useCartStore((state) => state.cart);
 
   const { mutateAsync: addPurchase } = useAddPurchase();
+  const [loading, setLoading] = useState(false);
 
   const handleCheckout = () => {
     if (!user) {
       toast.error("Por favor, inicia sesión para realizar el pago.");
       return;
     }
+    setLoading(true);
 
     const purchase: Purchase = {
       id: `${Math.random().toString(36).substring(2, 9)}`,
@@ -36,6 +39,7 @@ export const Summary = () => {
     };
 
     addPurchase({ email: user.email, purchase });
+    setLoading(false);
 
     redirect("/checkout");
   };
@@ -66,8 +70,13 @@ export const Summary = () => {
           </div>
 
           <div className="pt-4">
-            <Button className="w-full" size="lg" onClick={handleCheckout}>
-              Comprar
+            <Button
+              className="w-full"
+              size="lg"
+              onClick={handleCheckout}
+              disabled={loading}
+            >
+              {loading ? "Cargando..." : "Comprar"}
             </Button>
 
             <p className="text-xs text-center text-muted-foreground mt-4">
