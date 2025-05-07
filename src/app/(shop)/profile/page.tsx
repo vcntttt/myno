@@ -7,13 +7,13 @@ import { SecurityOptions } from "@/components/profile/security-options";
 import { useUserStore } from "@/store/user";
 import { useMounted } from "@/hooks/use-mounted";
 import { redirect } from "next/navigation";
-// import { Preferences } from "@/components/profile/preferences";
+import { ProfileSkeleton } from "@/components/profile/profile-skeleton";
 
 export default function ProfilePage() {
   const user = useUserStore((state) => state.user);
   const mounted = useMounted();
 
-  if (!mounted) return null;
+  if (!mounted) return <ProfileSkeleton />;
 
   if (!user) redirect("/auth/non-authorized");
 
@@ -24,7 +24,6 @@ export default function ProfilePage() {
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="personal">Datos Personales</TabsTrigger>
             <TabsTrigger value="security">Seguridad</TabsTrigger>
-            {/* <TabsTrigger value="preferences">Preferencias</TabsTrigger> */}
           </TabsList>
 
           <TabsContent value="personal" className="mt-6">
@@ -34,10 +33,6 @@ export default function ProfilePage() {
           <TabsContent value="security" className="mt-6">
             <SecurityOptions />
           </TabsContent>
-
-          {/* <TabsContent value="preferences" className="mt-6">
-            <Preferences />
-          </TabsContent> */}
         </Tabs>
       </div>
       <UserInfo />

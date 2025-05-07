@@ -16,10 +16,12 @@ import { redirect } from "next/navigation";
 export const UserInfo = () => {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
+
   function handleLogout() {
     logout();
     redirect("/");
   }
+
   return (
     <div className="w-full md:w-1/3">
       <Card>
