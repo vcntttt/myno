@@ -32,6 +32,8 @@ interface PurchaseDetailsProps {
 export function PurchaseDetails({ purchase }: PurchaseDetailsProps) {
   const [open, setOpen] = useState(false);
 
+  const iva = purchase.total * 0.19;
+
   // Format date
   const formattedDate = format(new Date(purchase.date), "PPP", { locale: es });
 
@@ -87,6 +89,14 @@ export function PurchaseDetails({ purchase }: PurchaseDetailsProps) {
                     </TableCell>
                   </TableRow>
                 ))}
+                <TableRow>
+                  <TableCell colSpan={3} className="text-right font-medium">
+                    IVA (19%)
+                  </TableCell>
+                  <TableCell className="text-right font-medium">
+                    {formatPrice(iva)}
+                  </TableCell>
+                </TableRow>
                 <TableRow>
                   <TableCell colSpan={3} className="text-right font-medium">
                     Total

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useAddPurchase } from "@/hooks/query/purchases";
+import { formatPrice } from "@/lib/utils/price";
 import { useCartStore } from "@/store/cart";
 import { useUserStore } from "@/store/user";
 import { Purchase } from "@/types/purchase";
@@ -49,11 +50,11 @@ export const Summary = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Subtotal</span>
-              <span>${subTotal.toFixed(2)}</span>
+              <span>${formatPrice(subTotal)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">IVA (15%)</span>
-              <span>${tax.toFixed(2)}</span>
+              <span className="text-muted-foreground">IVA (19%)</span>
+              <span>${formatPrice(tax)}</span>
             </div>
           </div>
 
@@ -61,7 +62,7 @@ export const Summary = () => {
 
           <div className="flex justify-between font-bold text-lg">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>${formatPrice(total)}</span>
           </div>
 
           <div className="pt-4">
