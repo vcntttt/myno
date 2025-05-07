@@ -13,6 +13,7 @@ import { useCartStore } from "@/store/cart";
 import Image from "next/image";
 import { QuantitySelector } from "./quantity-selector";
 import { getImage } from "@/lib/utils/images";
+import { formatPrice } from "@/lib/utils/price";
 
 export const ProductsInCart = () => {
   const {
@@ -65,10 +66,10 @@ export const ProductsInCart = () => {
                   <div className="flex items-center gap-4">
                     <div className="text-right">
                       <p className="font-medium">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ${formatPrice(item.price * item.quantity)}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        ${item.price.toFixed(2)} / unidad
+                        ${formatPrice(item.price)} / unidad
                       </p>
                     </div>
                   </div>

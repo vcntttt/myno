@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useMemo, useCallback } from "react";
 import { DataTable } from "@/components/history/data-table";
 import { columns } from "@/components/history/columns";
@@ -10,13 +11,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { Purchase, PurchaseStatus } from "@/types/purchase";
+import type { PurchaseStatus } from "@/types/purchase";
 import { useUserStore } from "@/store/user";
-import Link from "next/link";
-const purchaseData = [] as Purchase[];
+import { usePurchases } from "@/hooks/query/purchases";
+import { useMounted } from "@/hooks/use-mounted";
+import { redirect } from "next/navigation";
+import { HistoryPageSkeleton } from "@/components/history/history-skeleton";
 
 export default function HistoryPage() {
+  const mounted = useMounted();
   const user = useUserStore((state) => state.user);
+
+  const { data: purchases, isLoading } = usePurchases(user?.email ?? "", {
+    enabled: mounted && !!user?.email,
+  });
 
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,6 +45,8 @@ export default function HistoryPage() {
 
   // Filter data based on all filters
   const filteredData = useMemo(() => {
+    const purchaseData = purchases || [];
+
     return purchaseData.filter((purchase) => {
       // Filter by search query
       if (
@@ -66,7 +76,7 @@ export default function HistoryPage() {
 
       return true;
     });
-  }, [searchQuery, dateRange, selectedStatuses]);
+  }, [searchQuery, dateRange, selectedStatuses, purchases]);
 
   // Handle date range change
   const handleDateRangeChange = useCallback(
@@ -88,20 +98,11 @@ export default function HistoryPage() {
     setSelectedStatuses([]);
   }, []);
 
-  if (!user) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">No estás autenticado</h1>
-        <p className="text-sm text-muted-foreground">
-          Por favor,{" "}
-          <Link href="/auth/login" className="underline">
-            <span className="dark:text-orange-200/90">iniciar sesión </span>
-          </Link>{" "}
-          para acceder a tu perfil.
-        </p>
-      </div>
-    );
-  }
+  if (!mounted) return null;
+
+  if (!user) redirect("/auth/non-authorized");
+
+  if (isLoading) return <HistoryPageSkeleton />;
 
   return (
     <>
