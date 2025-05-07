@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useAddPurchase } from "@/hooks/query/purchases";
 import { useCartStore } from "@/store/cart";
 import { useUserStore } from "@/store/user";
+import { Purchase } from "@/types/purchase";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
@@ -13,12 +15,26 @@ export const Summary = () => {
   const subTotal = useCartStore((state) => state.getSummary().subTotal);
   const tax = useCartStore((state) => state.getSummary().tax);
   const user = useUserStore((state) => state.user);
+  const cart = useCartStore((state) => state.cart);
+
+  const { mutateAsync: addPurchase } = useAddPurchase();
 
   const handleCheckout = () => {
     if (!user) {
       toast.error("Por favor, inicia sesión para realizar el pago.");
       return;
     }
+
+    const purchase: Purchase = {
+      id: `${Math.random().toString(36).substring(2, 9)}`,
+      date: new Date().toISOString(),
+      items: cart,
+      status: "Delivered",
+      total,
+      user: user.email,
+    };
+
+    addPurchase({ email: user.email, purchase });
 
     redirect("/checkout");
   };
