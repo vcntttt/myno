@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useMemo, useCallback } from "react";
 import { DataTable } from "@/components/history/data-table";
 import { columns } from "@/components/history/columns";
@@ -10,13 +11,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { Purchase, PurchaseStatus } from "@/types/purchase";
+import type { PurchaseStatus } from "@/types/purchase";
 import { useUserStore } from "@/store/user";
 import Link from "next/link";
-const purchaseData = [] as Purchase[];
+import { usePurchases } from "@/hooks/query/purchases";
 
 export default function HistoryPage() {
   const user = useUserStore((state) => state.user);
+  const { data: purchases } = usePurchases("vrivera2023@alu.uct.cl");
 
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,6 +39,8 @@ export default function HistoryPage() {
 
   // Filter data based on all filters
   const filteredData = useMemo(() => {
+    const purchaseData = purchases || [];
+
     return purchaseData.filter((purchase) => {
       // Filter by search query
       if (
@@ -66,7 +70,7 @@ export default function HistoryPage() {
 
       return true;
     });
-  }, [searchQuery, dateRange, selectedStatuses]);
+  }, [searchQuery, dateRange, selectedStatuses, purchases]);
 
   // Handle date range change
   const handleDateRangeChange = useCallback(
