@@ -16,6 +16,7 @@ import { useUserStore } from "@/store/user";
 import { usePurchases } from "@/hooks/query/purchases";
 import { useMounted } from "@/hooks/use-mounted";
 import { redirect } from "next/navigation";
+import { HistoryPageSkeleton } from "@/components/history/history-skeleton";
 
 export default function HistoryPage() {
   const mounted = useMounted();
@@ -101,13 +102,7 @@ export default function HistoryPage() {
 
   if (!user) redirect("/auth/non-authorized");
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Cargando...</h1>
-      </div>
-    );
-  }
+  if (isLoading) return <HistoryPageSkeleton />;
 
   return (
     <>
