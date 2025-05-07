@@ -1,5 +1,10 @@
 import { Purchase } from "@/types/purchase";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  type UseQueryOptions,
+} from "@tanstack/react-query";
 
 async function getPurchases(email: string) {
   const res = await fetch(`/api/purchases/${email}`);
@@ -7,15 +12,20 @@ async function getPurchases(email: string) {
   return data;
 }
 
-export const usePurchases = (email: string) => {
+type UsePurchasesOptions = Omit<
+  UseQueryOptions<Purchase[], Error>,
+  "queryKey" | "queryFn"
+>;
+
+export function usePurchases(email: string, options?: UsePurchasesOptions) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["purchases", email],
     queryFn: () => getPurchases(email),
-    enabled: !!email,
+    ...options,
   });
 
   return { data, isLoading, error };
-};
+}
 
 interface AddPurchaseArgs {
   email: string;

@@ -1,14 +1,22 @@
 "use client";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserInfo } from "@/components/profile/user-info";
 import { PersonalData } from "@/components/profile/personal-data";
 import { SecurityOptions } from "@/components/profile/security-options";
 import { useUserStore } from "@/store/user";
 import Link from "next/link";
+import { useMounted } from "@/hooks/use-mounted";
 // import { Preferences } from "@/components/profile/preferences";
 
 export default function ProfilePage() {
   const user = useUserStore((state) => state.user);
+  const mounted = useMounted();
+
+  if (!mounted) {
+    return null;
+  }
+
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center gap-4">
@@ -23,6 +31,7 @@ export default function ProfilePage() {
       </div>
     );
   }
+
   return (
     <div className="flex flex-col md:flex-row gap-8">
       <div className="flex-1">

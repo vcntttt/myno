@@ -15,10 +15,15 @@ import type { PurchaseStatus } from "@/types/purchase";
 import { useUserStore } from "@/store/user";
 import Link from "next/link";
 import { usePurchases } from "@/hooks/query/purchases";
+import { useMounted } from "@/hooks/use-mounted";
 
 export default function HistoryPage() {
+  const mounted = useMounted();
   const user = useUserStore((state) => state.user);
-  const { data: purchases } = usePurchases("vrivera2023@alu.uct.cl");
+
+  const { data: purchases, isLoading } = usePurchases(user?.email ?? "", {
+    enabled: mounted && !!user?.email,
+  });
 
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
@@ -91,6 +96,18 @@ export default function HistoryPage() {
     setDateRange({ from: undefined, to: undefined });
     setSelectedStatuses([]);
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className="text-2xl font-bold">Cargando...</h1>
+      </div>
+    );
+  }
 
   if (!user) {
     return (
