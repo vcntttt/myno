@@ -14,7 +14,7 @@ interface State {
     subTotal: number;
     tax: number;
     total: number;
-  }
+  };
 }
 
 export const useCartStore = create<State>()(
@@ -26,17 +26,15 @@ export const useCartStore = create<State>()(
       addToCart: (product: CartProduct) => {
         const { cart } = get();
 
-        // 1. Revisar si el producto existe en el carrito con la talla seleccionada
-        const productInCart = cart.some(
-          (item) => item.id === product.id
-        );
+        // 1. Revisar si el producto existe en el carrito
+        const productInCart = cart.some((item) => item.id === product.id);
 
         if (!productInCart) {
           set({ cart: [...cart, product] });
           return;
         }
 
-        // 2. Se que el producto existe por talla... tengo que incrementar
+        // 2. Se que el producto existe... tengo que incrementar
         const updatedCartProducts = cart.map((item) => {
           if (item.id === product.id) {
             return { ...item, quantity: item.quantity + product.quantity };
@@ -51,8 +49,8 @@ export const useCartStore = create<State>()(
       updateProductQuantity: (id: number, quantity: number) => {
         const { cart, removeFromCart } = get();
         if (quantity == 0) {
-            removeFromCart(id);
-            return
+          removeFromCart(id);
+          return;
         }
 
         const updatedCartProducts = cart.map((item) => {
@@ -67,19 +65,21 @@ export const useCartStore = create<State>()(
       removeFromCart: (id: number) => {
         const { cart } = get();
 
-        const updatedCartProducts = cart.filter(
-          (item) => {
-            return item.id !== id
-          }
-        );
+        const updatedCartProducts = cart.filter((item) => {
+          return item.id !== id;
+        });
 
         set({ cart: updatedCartProducts });
       },
       getSummary: () => {
         const { cart } = get();
 
-        const totalItems = cart?.reduce((total,item) => total + item.quantity, 0) ?? 0
-        const subTotal = cart.reduce((subTotal, item) => subTotal + (item.price * item.quantity), 0);
+        const totalItems =
+          cart?.reduce((total, item) => total + item.quantity, 0) ?? 0;
+        const subTotal = cart.reduce(
+          (subTotal, item) => subTotal + item.price * item.quantity,
+          0
+        );
         const tax = subTotal * 0.15;
         const total = subTotal + tax;
 
@@ -87,9 +87,8 @@ export const useCartStore = create<State>()(
           totalItems,
           subTotal,
           tax,
-          total
-        }
-
+          total,
+        };
       },
       clearCart: () => {
         set({ cart: [] });
