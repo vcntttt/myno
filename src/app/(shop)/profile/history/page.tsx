@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/card";
 import type { PurchaseStatus } from "@/types/purchase";
 import { useUserStore } from "@/store/user";
-import Link from "next/link";
 import { usePurchases } from "@/hooks/query/purchases";
 import { useMounted } from "@/hooks/use-mounted";
+import { redirect } from "next/navigation";
 
 export default function HistoryPage() {
   const mounted = useMounted();
@@ -97,29 +97,14 @@ export default function HistoryPage() {
     setSelectedStatuses([]);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
+
+  if (!user) redirect("/auth/non-authorized");
 
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="text-2xl font-bold">Cargando...</h1>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">No estás autenticado</h1>
-        <p className="text-sm text-muted-foreground">
-          Por favor,{" "}
-          <Link href="/auth/login" className="underline">
-            <span className="dark:text-orange-200/90">iniciar sesión </span>
-          </Link>{" "}
-          para acceder a tu perfil.
-        </p>
       </div>
     );
   }
