@@ -133,5 +133,13 @@ export async function POST(req: Request): Promise<NextResponse> {
     });
   }
 
+  const remaining = products.filter((p) => !used.has(p.id));
+  if (remaining.length > 0) {
+    sections.push({
+      title: "El resto del catálogo",
+      products: remaining,
+    });
+  }
+
   return NextResponse.json({ sections });
 }
