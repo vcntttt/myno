@@ -5,43 +5,13 @@ import type { Purchase } from "@/types/purchase";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { PurchaseDetails } from "@/components/history/purchase-details";
-import { Checkbox } from "@/components/ui/checkbox";
 import { formatPrice } from "@/lib/utils/price";
 import { getStatusLabel, getStatusVariant } from "@/lib/utils/purchase-status";
 
-// Define columns for the data table
 export const columns: ColumnDef<Purchase>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Seleccionar todo"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Seleccionar fila"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -58,7 +28,7 @@ export const columns: ColumnDef<Purchase>[] = [
     },
     cell: ({ row }) => {
       const id = row.getValue("id") as string;
-      return <div className="font-medium">#{id}</div>;
+      return <div className="font-medium px-4">#{id}</div>;
     },
   },
   {
@@ -75,25 +45,12 @@ export const columns: ColumnDef<Purchase>[] = [
       );
     },
     cell: ({ row }) => {
-      // Convert string date to Date object
       const dateStr = row.getValue("date") as string;
       const date = new Date(dateStr);
 
-      // Format date
       const formattedDate = format(date, "d MMM yyyy", { locale: es });
 
-      return (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div>{formattedDate}</div>
-            </TooltipTrigger>
-            <TooltipContent>
-              {format(date, "PPpp", { locale: es })}
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      );
+      return <p className="px-4">{formattedDate}</p>;
     },
     sortingFn: (rowA, rowB, columnId) => {
       const dateA = new Date(rowA.getValue(columnId) as string).getTime();
@@ -106,11 +63,15 @@ export const columns: ColumnDef<Purchase>[] = [
     header: "Productos",
     cell: ({ row }) => {
       const items = row.getValue("items") as Purchase["items"];
-      const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
 
       return (
         <div>
-          {totalItems} {totalItems === 1 ? "producto" : "productos"}
+          {items.map((item, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <div className="flex-1 truncate">{item.name}</div>
+              <div className="text-right">{item.quantity}</div>
+            </div>
+          ))}
         </div>
       );
     },
@@ -132,7 +93,6 @@ export const columns: ColumnDef<Purchase>[] = [
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue("total"));
 
-      // Format the amount as a currency
       const formatted = formatPrice(amount);
 
       return <div className="text-right font-medium">{formatted}</div>;

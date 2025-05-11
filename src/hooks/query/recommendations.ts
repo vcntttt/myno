@@ -17,6 +17,7 @@ async function getRecommendations(
   });
   return res.json();
 }
+
 type RecommendationsData = { sections: Section[] };
 
 type UseRecommendationsOptions = Omit<
@@ -27,7 +28,7 @@ export const useRecommendations = (options?: UseRecommendationsOptions) => {
   const user = useUserStore((state) => state.user);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["products", user?.email ?? "guest"],
+    queryKey: ["recommendations", user?.email ?? "guest"],
     queryFn: () => getRecommendations(user?.email),
     ...options,
   });

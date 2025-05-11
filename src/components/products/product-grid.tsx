@@ -1,15 +1,7 @@
-"use client";
 import { ProductCard } from "@/components/products/product-card";
-import { useProducts } from "@/hooks/query/products";
-import { SkeletonProductGrid } from "./product-grid-skeleton";
+import { Product } from "@/types/products";
 
-export function ProductGrid() {
-  const { data: products, isLoading } = useProducts();
-
-  if (isLoading) {
-    return <SkeletonProductGrid />;
-  }
-
+export function ProductGrid({ products }: { products: Product[] }) {
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
       {products?.map((product) => (
