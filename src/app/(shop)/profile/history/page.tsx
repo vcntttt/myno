@@ -26,10 +26,8 @@ export default function HistoryPage() {
     enabled: mounted && !!user?.email,
   });
 
-  // State for search query
   const [searchQuery, setSearchQuery] = useState("");
 
-  // State for date range filter
   const [dateRange, setDateRange] = useState<{
     from: Date | undefined;
     to: Date | undefined;
@@ -38,17 +36,14 @@ export default function HistoryPage() {
     to: undefined,
   });
 
-  // State for selected statuses
   const [selectedStatuses, setSelectedStatuses] = useState<PurchaseStatus[]>(
     []
   );
 
-  // Filter data based on all filters
   const filteredData = useMemo(() => {
     const purchaseData = purchases || [];
 
     return purchaseData.filter((purchase) => {
-      // Filter by search query
       if (
         searchQuery &&
         !purchase.id.toLowerCase().includes(searchQuery.toLowerCase()) &&
@@ -59,14 +54,12 @@ export default function HistoryPage() {
         return false;
       }
 
-      // Filter by date range
       if (dateRange.from && new Date(purchase.date) < dateRange.from) {
         return false;
       }
       if (dateRange.to && new Date(purchase.date) > dateRange.to) {
         return false;
       }
-      // Filter by status
       if (
         selectedStatuses.length > 0 &&
         !selectedStatuses.includes(purchase.status as PurchaseStatus)
@@ -78,7 +71,6 @@ export default function HistoryPage() {
     });
   }, [searchQuery, dateRange, selectedStatuses, purchases]);
 
-  // Handle date range change
   const handleDateRangeChange = useCallback(
     (range: { from: Date | undefined; to: Date | undefined }) => {
       setDateRange(range);
@@ -86,12 +78,10 @@ export default function HistoryPage() {
     []
   );
 
-  // Handle status selection change
   const handleStatusChange = useCallback((statuses: PurchaseStatus[]) => {
     setSelectedStatuses(statuses);
   }, []);
 
-  // Reset all filters
   const resetFilters = useCallback(() => {
     setSearchQuery("");
     setDateRange({ from: undefined, to: undefined });
