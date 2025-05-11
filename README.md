@@ -2,23 +2,40 @@
 
 ## Descripción
 
-Myno es una aplicación web fullstack desarrollada con Next.js. Funciona como un ecommerce personalizado que sugiere productos basados en el historial de compras de cada usuario; la página principal muestra recomendaciones preparadas exclusivamente para ti, aumentando la afinidad y las ventas.
+**Myno** es un ecommerce B2B desarrollado con **Next.js 15** que vende packs mayoristas a minimarkets y tiendas de barrio.  
+Su diferencial es un **motor de recomendación** que:
 
-## Funcionalidades
+- Personaliza la portada (“Porque compraste X”, “Otros usuarios también compraron”, “Productos más vendidos”).
+- Sugiere artículos relacionados en la vista de producto y dentro del carrito.
+- Aprende de cada compra y actualiza el ranking global en tiempo real.
 
-- CRUD completo de productos en el carrito de compras.
-- Inicio de sesión simulado.
-- Búsqueda de productos apoyada por filtros.
-- Manejo de estados de carga en la UI.
+Los datos persistentes (historial de compras + contador de ventas) se almacenan en **Upstash Redis KV**; el resto vive como JSON estático o en LocalStorage.
+
+---
+
+## Funcionalidades principales
+
+| Módulo                     | ¿Qué hace?                                                                                               |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Carrito**                | CRUD completo (añadir, actualizar cantidad, eliminar, vaciar) con persistencia local.                    |
+| **Recomendaciones**        | Algoritmo por _tags_ + co-compra + popularidad global; secciones dinámicas en Home, Product Page y Cart. |
+| **Historial de compras**   | Consulta, filtrado por fecha/estado, modal de detalle y eliminación de órdenes (Redis).                  |
+| **Autenticación simulada** | Login por correo (sin contraseña), sesión guardada en LocalStorage, rutas protegidas.                    |
+| **Búsqueda filtrada**      | Filtros por categoría y ordenamiento con skeletons de carga.                                             |
+
+---
 
 ## Tecnologías
 
-- **Next.js 15** (App Router)
-- **TypeScript**
-- **TanStack Query** (gestión de datos)
-- **Tailwind CSS**
-- **Zustand** (gestión de estado global)
-- **Bun** (gestor de paquetes y runtime)
+| Capa              | Stack                                                                         |
+| ----------------- | ----------------------------------------------------------------------------- |
+| Frontend          | **Next.js 15** (App Router) · **React 18** · **TypeScript**                   |
+| Estado            | **TanStack Query** (datos remotos) · **Zustand** (estado global/localStorage) |
+| Estilos           | **Tailwind CSS** + Shadcn/ui                                                  |
+| Backend ligero    | **Upstash Redis KV** (historiales & sales count)                              |
+| Bundler / runtime | **Bun**                                                                       |
+
+---
 
 ## Instalación y ejecución
 
