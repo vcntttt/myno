@@ -46,9 +46,13 @@ export function useAddPurchase() {
         throw new Error("Error al guardar la compra");
       }
     },
-    onSuccess: (_data, vars) => {
+    onSuccess: (_data, { email }) => {
       queryClient.invalidateQueries({
-        queryKey: ["purchases", vars.email],
+        queryKey: ["purchases", email],
+      });
+      queryClient.invalidateQueries({ queryKey: ["recommendations", "guest"] });
+      queryClient.invalidateQueries({
+        queryKey: ["recommendations", email],
       });
     },
   });
@@ -72,6 +76,10 @@ export function useDeletePurchase() {
     },
     onSuccess: (_data, { email }) => {
       queryClient.invalidateQueries({ queryKey: ["purchases", email] });
+      queryClient.invalidateQueries({ queryKey: ["recommendations", "guest"] });
+      queryClient.invalidateQueries({
+        queryKey: ["recommendations", email],
+      });
     },
   });
 }
