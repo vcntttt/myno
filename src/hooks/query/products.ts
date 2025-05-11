@@ -1,10 +1,9 @@
 import { Product } from "@/types/products";
 import { useQuery } from "@tanstack/react-query";
 
-async function getProducts() {
+async function getProducts(): Promise<Product[]> {
   const res = await fetch("/api/products");
-  const data = (await res.json()) as Product[];
-  return data;
+  return res.json();
 }
 
 export const useProducts = () => {
