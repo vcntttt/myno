@@ -8,6 +8,7 @@ const redis = Redis.fromEnv();
 function buildPurchase(prodId: number, user: string): Purchase {
   const prod = products.find((p) => p.id === prodId);
   if (!prod) throw new Error(`Producto con id ${prodId} no encontrado`);
+
   const item: PurchaseItem = {
     id: prod.id,
     name: prod.name,
@@ -19,8 +20,9 @@ function buildPurchase(prodId: number, user: string): Purchase {
     tags: prod.tags,
     quantity: 1,
   };
+
   return {
-    id: prod.id.toString(),
+    id: `${Math.random().toString(36).substring(2, 9)}`,
     user,
     date: new Date().toISOString(),
     status: "Delivered",
