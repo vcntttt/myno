@@ -21,9 +21,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { Eye } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import { formatPrice } from "@/lib/utils/price";
 import { getStatusLabel, getStatusVariant } from "@/lib/utils/purchase-status";
+import { useDeletePurchase } from "@/hooks/query/purchases";
+import { Button } from "@/components/ui/button";
 
 interface PurchaseDetailsProps {
   purchase: Purchase;
@@ -31,10 +33,10 @@ interface PurchaseDetailsProps {
 
 export function PurchaseDetails({ purchase }: PurchaseDetailsProps) {
   const [open, setOpen] = useState(false);
+  const deleteMutation = useDeletePurchase();
 
   const iva = purchase.total * 0.19;
 
-  // Format date
   const formattedDate = format(new Date(purchase.date), "PPP", { locale: es });
 
   return (
@@ -109,6 +111,25 @@ export function PurchaseDetails({ purchase }: PurchaseDetailsProps) {
             </Table>
           </div>
         </div>
+        <Button
+          variant="destructive"
+          onClick={() => {
+            deleteMutation.mutateAsync({
+              email: purchase.user,
+              id: purchase.id,
+            });
+            setOpen(false);
+          }}
+          disabled={deleteMutation.isPending}
+        >
+          {deleteMutation.isPending ? (
+            "Eliminando…"
+          ) : (
+            <>
+              <Trash2 className="mr-2 h-4 w-4" /> Eliminar
+            </>
+          )}
+        </Button>
       </DialogContent>
     </Dialog>
   );

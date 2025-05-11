@@ -46,9 +46,39 @@ export function useAddPurchase() {
         throw new Error("Error al guardar la compra");
       }
     },
-    onSuccess: (_data, vars) => {
+    onSuccess: (_data, { email }) => {
       queryClient.invalidateQueries({
-        queryKey: ["purchases", vars.email],
+        queryKey: ["purchases", email],
+      });
+      queryClient.invalidateQueries({ queryKey: ["recommendations", "guest"] });
+      queryClient.invalidateQueries({
+        queryKey: ["recommendations", email],
+      });
+    },
+  });
+}
+
+interface DeletePurchaseArgs {
+  email: string;
+  id: string;
+}
+
+export function useDeletePurchase() {
+  const queryClient = useQueryClient();
+  return useMutation<void, Error, DeletePurchaseArgs>({
+    mutationFn: async ({ email, id }) => {
+      const res = await fetch(`/api/purchases/${email}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      if (!res.ok) throw new Error("Error al eliminar la compra");
+    },
+    onSuccess: (_data, { email }) => {
+      queryClient.invalidateQueries({ queryKey: ["purchases", email] });
+      queryClient.invalidateQueries({ queryKey: ["recommendations", "guest"] });
+      queryClient.invalidateQueries({
+        queryKey: ["recommendations", email],
       });
     },
   });
