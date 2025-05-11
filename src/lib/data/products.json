@@ -6,7 +6,8 @@
     "slug": "50x-manzanas",
     "categoria": "Frutas",
     "description": "Caja de 50 manzanas frescas de calidad premium, ideal para minimarkets, fruterías y venta a granel.",
-    "image": "manzanas"
+    "image": "manzanas",
+    "tags": ["manzana", "fruta", "caja-50", "fresco"]
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "slug": "50x-pepsi",
     "categoria": "Bebidas",
     "description": "Pack mayorista de 50 latas de Pepsi (350 ml c/u). Perfecto para tiendas, almacenes y eventos.",
-    "image": "pepsi"
+    "image": "pepsi",
+    "tags": ["pepsi", "gaseosa", "lata-350ml", "pack-50"]
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "slug": "50x-coca-cola",
     "categoria": "Bebidas",
     "description": "Caja de 50 latas de Coca Cola (350 ml c/u). Presentación ideal para venta en tiendas y consumo masivo.",
-    "image": "cocacola"
+    "image": "cocacola",
+    "tags": ["cocacola", "gaseosa", "lata-350ml", "pack-50"]
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "slug": "50x-lechugas",
     "categoria": "Verduras",
     "description": "Pack de 50 lechugas frescas, listas para la venta directa en ferias, verdulerías o restaurantes.",
-    "image": "lechugas"
+    "image": "lechugas",
+    "tags": ["lechuga", "verdura", "hoja", "pack-50"]
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "slug": "50x-peras",
     "categoria": "Frutas",
     "description": "Caja de 50 peras frescas de calidad premium, ideal para minimarkets, fruterías y venta a granel.",
-    "image": "peras"
+    "image": "peras",
+    "tags": ["pera", "fruta", "caja-50", "jugoso"]
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "slug": "mistral-de-manzana",
     "categoria": "Bebidas",
     "description": "Pack de 12 botellas de Mistral de Manzana, perfecto para tiendas especializadas y eventos.",
-    "image": "manzani"
+    "image": "manzani",
+    "tags": ["mistral", "jugo", "botella-500ml", "manzana"]
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "slug": "pack-huevos",
     "categoria": "Alimentos",
     "description": "Caja de 30 docenas de huevos frescos calibre XL, lista para la venta al por mayor.",
-    "image": "huevos"
+    "image": "huevos",
+    "tags": ["huevo", "docena", "XL", "fresco"]
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "slug": "givenchy-men",
     "categoria": "Perfumes",
     "description": "Pack de 12 unidades de perfume Givenchy Men, fragancia premium para tiendas especializadas.",
-    "image": "givenchy-men"
+    "image": "givenchy-men",
+    "tags": ["givenchy", "perfume", "masculino", "frasco-100ml"]
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "slug": "50x-platanos",
     "categoria": "Frutas",
     "description": "Caja de 50 plátanos maduros, ideales para jugos y consumo al detalle.",
-    "image": "platanos"
+    "image": "platanos",
+    "tags": ["platano", "fruta", "caja-50", "maduro"]
   },
   {
     "id": 10,
@@ -87,7 +96,8 @@
     "slug": "50x-naranjas",
     "categoria": "Frutas",
     "description": "Pack de 50 naranjas frescas, perfectas para zumos y ventas al por mayor.",
-    "image": "naranjas"
+    "image": "naranjas",
+    "tags": ["naranja", "fruta", "caja-50", "zumo"]
   },
   {
     "id": 11,
@@ -96,7 +106,8 @@
     "slug": "50x-uvas",
     "categoria": "Frutas",
     "description": "Caja de 50 racimos de uvas de mesa, frescas y jugosas.",
-    "image": "uvas"
+    "image": "uvas",
+    "tags": ["uva", "fruta", "racimo", "caja-50"]
   },
   {
     "id": 12,
@@ -105,7 +116,8 @@
     "slug": "50x-mangos",
     "categoria": "Frutas",
     "description": "Pack de 50 mangos de calidad exportación, con pulpa dulce.",
-    "image": "mangos"
+    "image": "mangos",
+    "tags": ["mango", "fruta", "dulce", "caja-50"]
   },
   {
     "id": 14,
@@ -114,7 +126,8 @@
     "slug": "50x-tomates",
     "categoria": "Verduras",
     "description": "Pack de 50 tomates rojos maduros, listos para ensaladas y salsas.",
-    "image": "tomates"
+    "image": "tomates",
+    "tags": ["tomate", "verdura", "caja-50", "maduro"]
   },
   {
     "id": 15,
@@ -123,7 +136,8 @@
     "slug": "50x-pepinos",
     "categoria": "Verduras",
     "description": "Caja de 50 pepinos frescos, ideales para ensaladas y conservas.",
-    "image": "pepinos"
+    "image": "pepinos",
+    "tags": ["pepino", "verdura", "caja-50", "fresco"]
   },
   {
     "id": 16,
@@ -132,7 +146,8 @@
     "slug": "50x-zanahorias",
     "categoria": "Verduras",
     "description": "Pack de 50 zanahorias naranjas, perfectas para jugos y guisos.",
-    "image": "zanahorias"
+    "image": "zanahorias",
+    "tags": ["zanahoria", "verdura", "caja-50", "jugoso"]
   },
   {
     "id": 19,
@@ -141,7 +156,8 @@
     "slug": "24x-agua-mineral",
     "categoria": "Bebidas",
     "description": "Pack de 24 botellas de agua mineral de 500 ml, sin gas.",
-    "image": "agua-mineral"
+    "image": "agua-mineral",
+    "tags": ["agua", "mineral", "botella-500ml", "sin-gas"]
   },
   {
     "id": 20,
@@ -150,7 +166,8 @@
     "slug": "24x-jugo-de-naranja",
     "categoria": "Bebidas",
     "description": "Pack de 24 botellas de jugo de naranja 100% natural (350 ml).",
-    "image": "jugo-naranja"
+    "image": "jugo-naranja",
+    "tags": ["jugo", "naranja", "botella-350ml", "natural"]
   },
   {
     "id": 21,
@@ -159,7 +176,8 @@
     "slug": "12x-vino-tinto",
     "categoria": "Bebidas",
     "description": "Caja de 12 botellas de vino tinto reserva, cosecha 2022.",
-    "image": "vino-tinto"
+    "image": "vino-tinto",
+    "tags": ["vino", "tinto", "botella-750ml", "reserva"]
   },
   {
     "id": 22,
@@ -168,7 +186,8 @@
     "slug": "12x-cerveza",
     "categoria": "Bebidas",
     "description": "Pack de 12 botellas de cerveza artesanal clara (330 ml).",
-    "image": "cerveza"
+    "image": "cerveza",
+    "tags": ["cerveza", "artesanal", "botella-330ml", "clara"]
   },
   {
     "id": 23,
@@ -177,7 +196,8 @@
     "slug": "10x-te-verde",
     "categoria": "Bebidas",
     "description": "Pack de 10 botellas de té verde frío, suave sabor a hierbas.",
-    "image": "te-verde"
+    "image": "te-verde",
+    "tags": ["té", "verde", "botella-500ml", "herbal"]
   },
   {
     "id": 24,
@@ -186,7 +206,8 @@
     "slug": "20x-arroz",
     "categoria": "Alimentos",
     "description": "Caja de 20 bolsas de 1 kg de arroz blanco de grano largo.",
-    "image": "arroz"
+    "image": "arroz",
+    "tags": ["arroz", "grano-largo", "bolsa-1kg", "blanco"]
   },
   {
     "id": 25,
@@ -195,7 +216,8 @@
     "slug": "20x-tallarines",
     "categoria": "Alimentos",
     "description": "Pack de 20 paquetes de tallarines seca (500 g c/u), variedad espirales.",
-    "image": "tallarines"
+    "image": "tallarines",
+    "tags": ["tallarines", "pasta", "paquete-500g", "espirales"]
   },
   {
     "id": 26,
@@ -204,7 +226,8 @@
     "slug": "10x-harina",
     "categoria": "Alimentos",
     "description": "Pack de 10 bolsas de harina de trigo (1 kg) para repostería.",
-    "image": "harina"
+    "image": "harina",
+    "tags": ["harina", "trigo", "bolsa-1kg", "repostería"]
   },
   {
     "id": 27,
@@ -213,7 +236,8 @@
     "slug": "10x-azucar",
     "categoria": "Alimentos",
     "description": "Caja de 10 bolsas de azúcar blanca refinada (1 kg).",
-    "image": "azucar"
+    "image": "azucar",
+    "tags": ["azúcar", "bolsa-1kg", "refinada"]
   },
   {
     "id": 28,
@@ -222,7 +246,8 @@
     "slug": "10x-sal",
     "categoria": "Alimentos",
     "description": "Pack de 10 bolsas de sal de mesa fina (1 kg).",
-    "image": "sal"
+    "image": "sal",
+    "tags": ["sal", "mesa", "bolsa-1kg", "fina"]
   },
   {
     "id": 29,
@@ -231,7 +256,8 @@
     "slug": "pack-papas-fritas",
     "categoria": "Snacks",
     "description": "Caja de 30 bolsas de papas fritas sabor clásico (150 g).",
-    "image": "papas-fritas"
+    "image": "papas-fritas",
+    "tags": ["papas-fritas", "snack", "bolsa-150g", "clásico"]
   },
   {
     "id": 30,
@@ -240,7 +266,8 @@
     "slug": "pack-galletas",
     "categoria": "Snacks",
     "description": "Pack de 20 cajas de galletas surtidas (200 g c/u).",
-    "image": "galletas"
+    "image": "galletas",
+    "tags": ["galletas", "snack", "caja-200g", "surtido"]
   },
   {
     "id": 31,
@@ -249,7 +276,8 @@
     "slug": "12x-dior-sauvage",
     "categoria": "Perfumes",
     "description": "Pack de 12 unidades de Dior Sauvage, fragancia masculina premium.",
-    "image": "dior-sauvage"
+    "image": "dior-sauvage",
+    "tags": ["dior", "sauvage", "perfume", "masculino", "frasco-100ml"]
   },
   {
     "id": 32,
@@ -258,7 +286,8 @@
     "slug": "12x-chanel-bleu",
     "categoria": "Perfumes",
     "description": "Caja de 12 perfumes Chanel Bleu de Chanel, aromática y elegante.",
-    "image": "chanel-bleu"
+    "image": "chanel-bleu",
+    "tags": ["chanel", "bleu", "perfume", "unisex", "frasco-100ml"]
   },
   {
     "id": 33,
@@ -267,7 +296,14 @@
     "slug": "12x-1-million",
     "categoria": "Perfumes",
     "description": "Pack de 12 frascos de Paco Rabanne 1 Million, fragancia icónica.",
-    "image": "1-million"
+    "image": "1-million",
+    "tags": [
+      "paco-rabanne",
+      "1-million",
+      "perfume",
+      "masculino",
+      "frasco-100ml"
+    ]
   },
   {
     "id": 34,
@@ -276,7 +312,8 @@
     "slug": "12x-versace-eros",
     "categoria": "Perfumes",
     "description": "Caja de 12 unidades de Versace Eros, aroma intenso y único.",
-    "image": "versace-eros"
+    "image": "versace-eros",
+    "tags": ["versace", "eros", "perfume", "unisex", "frasco-100ml"]
   },
   {
     "id": 35,
@@ -285,6 +322,7 @@
     "slug": "12x-ck-one",
     "categoria": "Perfumes",
     "description": "Pack de 12 fragancias CK One de Calvin Klein, unisex y fresco.",
-    "image": "ck-one"
+    "image": "ck-one",
+    "tags": ["calvin-klein", "ck-one", "perfume", "unisex", "frasco-100ml"]
   }
 ]

@@ -6,6 +6,7 @@ export interface Product {
   image: string;
   slug: string;
   categoria: string;
+  tags: string[];
 }
 
 export interface CartProduct extends Product {
