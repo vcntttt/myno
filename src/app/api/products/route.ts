@@ -31,17 +31,23 @@ export async function POST(req: Request): Promise<NextResponse> {
   const { email } = (await req.json()) as { email?: string };
   const sections: { title: string; products: Product[] }[] = [];
 
-  if (!email) {
-    const topGlobal = await getGlobalTop(8);
-    sections.push({ title: "Productos más vendidos", products: topGlobal });
-    const used = new Set(topGlobal.map((p) => p.id));
-    const remaining = products.filter((p) => !used.has(p.id));
-    sections.push({ title: "El resto del catálogo", products: remaining });
-    return NextResponse.json({ sections });
+  let history: Purchase[] = [];
+
+  if (email) {
+    history = (await redis.get<Purchase[]>(`history:${email}`)) ?? [];
   }
 
-  const history = (await redis.get<Purchase[]>(`history:${email}`)) ?? [];
-  if (history.length === 0) {
+  if (!email || history.length === 0) {
+    const topGlobal = await getGlobalTop(8);
+    sections.push({ title: "Productos más vendidos", products: topGlobal });
+    const excludedIds = new Set(topGlobal.map((p) => p.id));
+    const remaining = products.filter((p) => !excludedIds.has(p.id));
+
+    sections.push({
+      title: "El resto del catálogo",
+      products: remaining,
+    });
+
     return NextResponse.json({ sections });
   }
 
