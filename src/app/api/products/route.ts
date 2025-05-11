@@ -3,14 +3,9 @@ import products from "@/lib/data/products.json";
 import { Redis } from "@upstash/redis";
 import type { Product } from "@/types/products";
 import type { Purchase } from "@/types/purchase";
+import { tagSimilarity } from "@/lib/utils/recommendations";
 
 const redis = Redis.fromEnv();
-
-function tagSimilarity(a: Product, b: Product): number {
-  const setA = new Set(a.tags);
-  const common = b.tags.filter((t) => setA.has(t)).length;
-  return common / Math.max(a.tags.length, b.tags.length);
-}
 
 async function getGlobalTop(n: number): Promise<Product[]> {
   const raw = await redis.hgetall<Record<string, number>>("sales_count");

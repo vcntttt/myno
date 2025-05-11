@@ -24,7 +24,7 @@ export function ClientCartPage() {
       )}
 
       <h2 className="text-xl font-semibold mb-6">También te puede interesar</h2>
-      <ProductGrid />
+      <ProductGrid products={[]} />
     </>
   );
 }

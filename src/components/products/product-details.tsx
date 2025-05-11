@@ -8,22 +8,20 @@ import { Separator } from "@/components/ui/separator";
 import { formatPrice } from "@/lib/utils/price";
 import { useCartStore } from "@/store/cart";
 import { toast } from "sonner";
-import { useProducts } from "@/hooks/query/products";
 import { useProductBySlug } from "@/hooks/query/product-by-slug";
 import { notFound } from "next/navigation";
 import { getImage } from "@/lib/utils/images";
-import type { Product } from "@/types/products";
 import { ProductGrid } from "./product-grid";
 
 export function ProductDetail({ slug }: { slug: string }) {
-  const { data: all } = useProducts();
-  const { data: product } = useProductBySlug(slug);
+  const { data } = useProductBySlug(slug);
+
+  const product = data?.product;
 
   if (!product) {
     notFound();
   }
 
-  const relatedProducts = (all ?? []).filter((p: Product) => p.slug !== slug);
   const addToCart = useCartStore((state) => state.addToCart);
 
   const handleAddToCart = () => {
@@ -111,10 +109,10 @@ export function ProductDetail({ slug }: { slug: string }) {
         </div>
       </div>
 
-      {relatedProducts.length > 0 && (
+      {data?.recommendations.length > 0 && (
         <div>
           <h2 className="text-2xl font-bold mb-6">Productos relacionados</h2>
-          <ProductGrid />
+          <ProductGrid products={data.recommendations} />
         </div>
       )}
     </div>
