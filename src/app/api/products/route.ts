@@ -6,15 +6,6 @@ import type { Purchase } from "@/types/purchase";
 
 const redis = Redis.fromEnv();
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
 function tagSimilarity(a: Product, b: Product): number {
   const setA = new Set(a.tags);
   const common = b.tags.filter((t) => setA.has(t)).length;
@@ -41,18 +32,11 @@ export async function POST(req: Request): Promise<NextResponse> {
   const sections: { title: string; products: Product[] }[] = [];
 
   if (!email) {
-    const topGlobal = await getGlobalTop(10);
+    const topGlobal = await getGlobalTop(8);
     sections.push({ title: "Productos más vendidos", products: topGlobal });
-    if (topGlobal.length === 0) {
-      return NextResponse.json({
-        sections: [
-          {
-            title: "Nuestro catálogo de productos",
-            products: shuffle(products),
-          },
-        ],
-      });
-    }
+    const used = new Set(topGlobal.map((p) => p.id));
+    const remaining = products.filter((p) => !used.has(p.id));
+    sections.push({ title: "El resto del catálogo", products: remaining });
     return NextResponse.json({ sections });
   }
 
