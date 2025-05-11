@@ -53,3 +53,25 @@ export function useAddPurchase() {
     },
   });
 }
+
+interface DeletePurchaseArgs {
+  email: string;
+  id: string;
+}
+
+export function useDeletePurchase() {
+  const queryClient = useQueryClient();
+  return useMutation<void, Error, DeletePurchaseArgs>({
+    mutationFn: async ({ email, id }) => {
+      const res = await fetch(`/api/purchases/${email}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      if (!res.ok) throw new Error("Error al eliminar la compra");
+    },
+    onSuccess: (_data, { email }) => {
+      queryClient.invalidateQueries({ queryKey: ["purchases", email] });
+    },
+  });
+}
