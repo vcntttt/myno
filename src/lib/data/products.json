@@ -5,9 +5,9 @@
     "price": 30000,
     "slug": "50x-manzanas",
     "categoria": "Frutas",
-    "description": "Caja de 50 manzanas frescas de calidad premium, ideal para minimarkets, fruterías y venta a granel.",
+    "description": "Caja de 50 manzanas frescas, calidad estándar.",
     "image": "manzanas",
-    "tags": ["manzana", "fruta", "caja-50", "fresco"]
+    "tags": ["fruta", "manzana", "fresh", "box-50"]
   },
   {
     "id": 2,
@@ -15,9 +15,9 @@
     "price": 22000,
     "slug": "50x-pepsi",
     "categoria": "Bebidas",
-    "description": "Pack mayorista de 50 latas de Pepsi (350 ml c/u). Perfecto para tiendas, almacenes y eventos.",
+    "description": "Pack de 50 latas de Pepsi de 350 ml c/u.",
     "image": "pepsi",
-    "tags": ["pepsi", "gaseosa", "lata-350ml", "pack-50"]
+    "tags": ["bebida", "gaseosa", "pepsi", "can-350ml", "pack-50"]
   },
   {
     "id": 3,
@@ -25,9 +25,9 @@
     "price": 26000,
     "slug": "50x-coca-cola",
     "categoria": "Bebidas",
-    "description": "Caja de 50 latas de Coca Cola (350 ml c/u). Presentación ideal para venta en tiendas y consumo masivo.",
+    "description": "Pack de 50 latas de Coca-Cola de 350 ml c/u.",
     "image": "cocacola",
-    "tags": ["cocacola", "gaseosa", "lata-350ml", "pack-50"]
+    "tags": ["bebida", "gaseosa", "cocacola", "can-350ml", "pack-50"]
   },
   {
     "id": 4,
@@ -35,9 +35,9 @@
     "price": 18000,
     "slug": "50x-lechugas",
     "categoria": "Verduras",
-    "description": "Pack de 50 lechugas frescas, listas para la venta directa en ferias, verdulerías o restaurantes.",
+    "description": "Pack de 50 lechugas frescas, hoja verde.",
     "image": "lechugas",
-    "tags": ["lechuga", "verdura", "hoja", "pack-50"]
+    "tags": ["verdura", "lechuga", "fresh", "box-50"]
   },
   {
     "id": 5,
@@ -45,39 +45,39 @@
     "price": 28000,
     "slug": "50x-peras",
     "categoria": "Frutas",
-    "description": "Caja de 50 peras frescas de calidad premium, ideal para minimarkets, fruterías y venta a granel.",
+    "description": "Caja de 50 peras jugosas, calidad estándar.",
     "image": "peras",
-    "tags": ["pera", "fruta", "caja-50", "jugoso"]
+    "tags": ["fruta", "pera", "fresh", "box-50"]
   },
   {
     "id": 6,
     "name": "12x Mistral de Manzana",
-    "price": 6000,
-    "slug": "mistral-de-manzana",
+    "price": 8000,
+    "slug": "12x-mistral-de-manzana",
     "categoria": "Bebidas",
-    "description": "Pack de 12 botellas de Mistral de Manzana, perfecto para tiendas especializadas y eventos.",
+    "description": "Pack de 12 botellas de Mistral de Manzana (500 ml).",
     "image": "manzani",
-    "tags": ["mistral", "jugo", "botella-500ml", "manzana"]
+    "tags": ["bebida", "licor", "mistral", "bottle-500ml", "pack-12"]
   },
   {
     "id": 7,
-    "name": "Pack de Huevos",
-    "price": 15000,
-    "slug": "pack-huevos",
+    "name": "Pack de Huevos (30 docenas)",
+    "price": 18000,
+    "slug": "pack-huevos-30-docenas",
     "categoria": "Alimentos",
-    "description": "Caja de 30 docenas de huevos frescos calibre XL, lista para la venta al por mayor.",
+    "description": "Caja de 30 docenas de huevos XL, frescos.",
     "image": "huevos",
-    "tags": ["huevo", "docena", "XL", "fresco"]
+    "tags": ["alimento", "huevo", "docenas-30", "fresh"]
   },
   {
     "id": 8,
-    "name": "Givenchy Men",
-    "price": 120000,
-    "slug": "givenchy-men",
+    "name": "Givenchy Men (12 uds)",
+    "price": 1250000,
+    "slug": "12x-givenchy-men",
     "categoria": "Perfumes",
-    "description": "Pack de 12 unidades de perfume Givenchy Men, fragancia premium para tiendas especializadas.",
+    "description": "Pack de 12 frascos Givenchy Men (100 ml).",
     "image": "givenchy-men",
-    "tags": ["givenchy", "perfume", "masculino", "frasco-100ml"]
+    "tags": ["perfume", "givenchy", "masculino", "bottle-100ml", "pack-12"]
   },
   {
     "id": 9,
@@ -85,59 +85,59 @@
     "price": 20000,
     "slug": "50x-platanos",
     "categoria": "Frutas",
-    "description": "Caja de 50 plátanos maduros, ideales para jugos y consumo al detalle.",
+    "description": "Caja de 50 plátanos maduros.",
     "image": "platanos",
-    "tags": ["platano", "fruta", "caja-50", "maduro"]
+    "tags": ["fruta", "platano", "fresh", "box-50"]
   },
   {
     "id": 10,
     "name": "50x Naranjas",
-    "price": 35000,
+    "price": 32000,
     "slug": "50x-naranjas",
     "categoria": "Frutas",
-    "description": "Pack de 50 naranjas frescas, perfectas para zumos y ventas al por mayor.",
+    "description": "Pack de 50 naranjas, perfectas para zumo.",
     "image": "naranjas",
-    "tags": ["naranja", "fruta", "caja-50", "zumo"]
+    "tags": ["fruta", "naranja", "fresh", "box-50"]
   },
   {
     "id": 11,
     "name": "50x Uvas",
-    "price": 45000,
+    "price": 42000,
     "slug": "50x-uvas",
     "categoria": "Frutas",
-    "description": "Caja de 50 racimos de uvas de mesa, frescas y jugosas.",
+    "description": "Caja de 50 racimos de uvas frescas.",
     "image": "uvas",
-    "tags": ["uva", "fruta", "racimo", "caja-50"]
+    "tags": ["fruta", "uva", "fresh", "box-50"]
   },
   {
     "id": 12,
     "name": "50x Mangos",
-    "price": 55000,
+    "price": 50000,
     "slug": "50x-mangos",
     "categoria": "Frutas",
-    "description": "Pack de 50 mangos de calidad exportación, con pulpa dulce.",
+    "description": "Pack de 50 mangos dulces.",
     "image": "mangos",
-    "tags": ["mango", "fruta", "dulce", "caja-50"]
+    "tags": ["fruta", "mango", "dulce", "box-50"]
   },
   {
     "id": 14,
     "name": "50x Tomates",
-    "price": 22000,
+    "price": 21000,
     "slug": "50x-tomates",
     "categoria": "Verduras",
-    "description": "Pack de 50 tomates rojos maduros, listos para ensaladas y salsas.",
+    "description": "Pack de 50 tomates rojos maduros.",
     "image": "tomates",
-    "tags": ["tomate", "verdura", "caja-50", "maduro"]
+    "tags": ["verdura", "tomate", "fresh", "box-50"]
   },
   {
     "id": 15,
     "name": "50x Pepinos",
-    "price": 18000,
+    "price": 17500,
     "slug": "50x-pepinos",
     "categoria": "Verduras",
-    "description": "Caja de 50 pepinos frescos, ideales para ensaladas y conservas.",
+    "description": "Caja de 50 pepinos crujientes.",
     "image": "pepinos",
-    "tags": ["pepino", "verdura", "caja-50", "fresco"]
+    "tags": ["verdura", "pepino", "fresh", "box-50"]
   },
   {
     "id": 16,
@@ -145,9 +145,9 @@
     "price": 15000,
     "slug": "50x-zanahorias",
     "categoria": "Verduras",
-    "description": "Pack de 50 zanahorias naranjas, perfectas para jugos y guisos.",
+    "description": "Pack de 50 zanahorias naranjas.",
     "image": "zanahorias",
-    "tags": ["zanahoria", "verdura", "caja-50", "jugoso"]
+    "tags": ["verdura", "zanahoria", "fresh", "box-50"]
   },
   {
     "id": 19,
@@ -155,119 +155,119 @@
     "price": 12000,
     "slug": "24x-agua-mineral",
     "categoria": "Bebidas",
-    "description": "Pack de 24 botellas de agua mineral de 500 ml, sin gas.",
+    "description": "Pack de 24 botellas de agua mineral (500 ml).",
     "image": "agua-mineral",
-    "tags": ["agua", "mineral", "botella-500ml", "sin-gas"]
+    "tags": ["bebida", "agua", "bottle-500ml", "pack-24"]
   },
   {
     "id": 20,
     "name": "24x Jugo de Naranja",
-    "price": 30000,
+    "price": 28000,
     "slug": "24x-jugo-de-naranja",
     "categoria": "Bebidas",
-    "description": "Pack de 24 botellas de jugo de naranja 100% natural (350 ml).",
+    "description": "Pack de 24 botellas de jugo de naranja (350 ml).",
     "image": "jugo-naranja",
-    "tags": ["jugo", "naranja", "botella-350ml", "natural"]
+    "tags": ["bebida", "jugo", "naranja", "bottle-350ml", "pack-24"]
   },
   {
     "id": 21,
     "name": "12x Vino Tinto",
-    "price": 180000,
+    "price": 160000,
     "slug": "12x-vino-tinto",
     "categoria": "Bebidas",
-    "description": "Caja de 12 botellas de vino tinto reserva, cosecha 2022.",
+    "description": "Caja de 12 botellas de vino tinto reserva (750 ml).",
     "image": "vino-tinto",
-    "tags": ["vino", "tinto", "botella-750ml", "reserva"]
+    "tags": ["bebida", "vino", "tinto", "bottle-750ml", "licor", "pack-12"]
   },
   {
     "id": 22,
     "name": "12x Cerveza",
-    "price": 50000,
+    "price": 48000,
     "slug": "12x-cerveza",
     "categoria": "Bebidas",
-    "description": "Pack de 12 botellas de cerveza artesanal clara (330 ml).",
+    "description": "Pack de 12 cervezas artesanales claras (330 ml).",
     "image": "cerveza",
-    "tags": ["cerveza", "artesanal", "botella-330ml", "clara"]
+    "tags": ["bebida", "cerveza", "artesanal", "bottle-330ml", "pack-12"]
   },
   {
     "id": 23,
     "name": "10x Té Verde",
-    "price": 18000,
+    "price": 17000,
     "slug": "10x-te-verde",
     "categoria": "Bebidas",
-    "description": "Pack de 10 botellas de té verde frío, suave sabor a hierbas.",
+    "description": "Pack de 10 botellas de té verde (500 ml).",
     "image": "te-verde",
-    "tags": ["té", "verde", "botella-500ml", "herbal"]
+    "tags": ["bebida", "té", "verde", "bottle-500ml", "pack-10"]
   },
   {
     "id": 24,
     "name": "20x Arroz",
-    "price": 40000,
+    "price": 36000,
     "slug": "20x-arroz",
     "categoria": "Alimentos",
-    "description": "Caja de 20 bolsas de 1 kg de arroz blanco de grano largo.",
+    "description": "Caja de 20 bolsas de arroz blanco (1 kg).",
     "image": "arroz",
-    "tags": ["arroz", "grano-largo", "bolsa-1kg", "blanco"]
+    "tags": ["alimento", "arroz", "bag-1kg", "pack-20"]
   },
   {
     "id": 25,
-    "name": "20x tallarines",
-    "price": 45000,
+    "name": "20x Tallarines",
+    "price": 38000,
     "slug": "20x-tallarines",
     "categoria": "Alimentos",
-    "description": "Pack de 20 paquetes de tallarines seca (500 g c/u), variedad espirales.",
+    "description": "Pack de 20 paquetes de tallarines secos (500 g).",
     "image": "tallarines",
-    "tags": ["tallarines", "pasta", "paquete-500g", "espirales"]
+    "tags": ["alimento", "pasta", "pack-20", "bag-500g"]
   },
   {
     "id": 26,
     "name": "10x Harina",
-    "price": 22000,
+    "price": 21000,
     "slug": "10x-harina",
     "categoria": "Alimentos",
-    "description": "Pack de 10 bolsas de harina de trigo (1 kg) para repostería.",
+    "description": "Pack de 10 bolsas de harina de trigo (1 kg).",
     "image": "harina",
-    "tags": ["harina", "trigo", "bolsa-1kg", "repostería"]
+    "tags": ["alimento", "harina", "bag-1kg", "pack-10"]
   },
   {
     "id": 27,
     "name": "10x Azúcar",
-    "price": 28000,
+    "price": 26000,
     "slug": "10x-azucar",
     "categoria": "Alimentos",
-    "description": "Caja de 10 bolsas de azúcar blanca refinada (1 kg).",
+    "description": "Caja de 10 bolsas de azúcar (1 kg).",
     "image": "azucar",
-    "tags": ["azúcar", "bolsa-1kg", "refinada"]
+    "tags": ["alimento", "azúcar", "bag-1kg", "pack-10"]
   },
   {
     "id": 28,
     "name": "10x Sal",
-    "price": 20000,
+    "price": 24000,
     "slug": "10x-sal",
     "categoria": "Alimentos",
-    "description": "Pack de 10 bolsas de sal de mesa fina (1 kg).",
+    "description": "Pack de 10 bolsas de sal fina (1 kg).",
     "image": "sal",
-    "tags": ["sal", "mesa", "bolsa-1kg", "fina"]
+    "tags": ["alimento", "sal", "bag-1kg", "pack-10"]
   },
   {
     "id": 29,
-    "name": "Pack de Papas Fritas",
+    "name": "Pack de Papas Fritas (30 uds)",
     "price": 35000,
-    "slug": "pack-papas-fritas",
+    "slug": "pack-papas-fritas-30",
     "categoria": "Snacks",
-    "description": "Caja de 30 bolsas de papas fritas sabor clásico (150 g).",
+    "description": "Caja de 30 bolsas de papas fritas (150 g c/u).",
     "image": "papas-fritas",
-    "tags": ["papas-fritas", "snack", "bolsa-150g", "clásico"]
+    "tags": ["snack", "papas-fritas", "bag-150g", "box-30"]
   },
   {
     "id": 30,
-    "name": "Pack de Galletas",
+    "name": "Pack de Galletas (20 uds)",
     "price": 30000,
-    "slug": "pack-galletas",
+    "slug": "pack-galletas-20",
     "categoria": "Snacks",
     "description": "Pack de 20 cajas de galletas surtidas (200 g c/u).",
     "image": "galletas",
-    "tags": ["galletas", "snack", "caja-200g", "surtido"]
+    "tags": ["snack", "galletas", "box-20", "200g"]
   },
   {
     "id": 31,
@@ -275,9 +275,9 @@
     "price": 720000,
     "slug": "12x-dior-sauvage",
     "categoria": "Perfumes",
-    "description": "Pack de 12 unidades de Dior Sauvage, fragancia masculina premium.",
+    "description": "Pack de 12 frascos Dior Sauvage (100 ml).",
     "image": "dior-sauvage",
-    "tags": ["dior", "sauvage", "perfume", "masculino", "frasco-100ml"]
+    "tags": ["perfume", "dior", "sauvage", "bottle-100ml", "pack-12"]
   },
   {
     "id": 32,
@@ -285,9 +285,9 @@
     "price": 800000,
     "slug": "12x-chanel-bleu",
     "categoria": "Perfumes",
-    "description": "Caja de 12 perfumes Chanel Bleu de Chanel, aromática y elegante.",
+    "description": "Pack de 12 frascos Chanel Bleu (100 ml).",
     "image": "chanel-bleu",
-    "tags": ["chanel", "bleu", "perfume", "unisex", "frasco-100ml"]
+    "tags": ["perfume", "chanel", "bleu", "bottle-100ml", "pack-12"]
   },
   {
     "id": 33,
@@ -295,15 +295,9 @@
     "price": 680000,
     "slug": "12x-1-million",
     "categoria": "Perfumes",
-    "description": "Pack de 12 frascos de Paco Rabanne 1 Million, fragancia icónica.",
+    "description": "Pack de 12 frascos Paco Rabanne 1 Million (100 ml).",
     "image": "1-million",
-    "tags": [
-      "paco-rabanne",
-      "1-million",
-      "perfume",
-      "masculino",
-      "frasco-100ml"
-    ]
+    "tags": ["perfume", "paco-rabanne", "1-million", "bottle-100ml", "pack-12"]
   },
   {
     "id": 34,
@@ -311,9 +305,9 @@
     "price": 700000,
     "slug": "12x-versace-eros",
     "categoria": "Perfumes",
-    "description": "Caja de 12 unidades de Versace Eros, aroma intenso y único.",
+    "description": "Pack de 12 frascos Versace Eros (100 ml).",
     "image": "versace-eros",
-    "tags": ["versace", "eros", "perfume", "unisex", "frasco-100ml"]
+    "tags": ["perfume", "versace", "eros", "bottle-100ml", "pack-12"]
   },
   {
     "id": 35,
@@ -321,8 +315,8 @@
     "price": 650000,
     "slug": "12x-ck-one",
     "categoria": "Perfumes",
-    "description": "Pack de 12 fragancias CK One de Calvin Klein, unisex y fresco.",
+    "description": "Pack de 12 frascos CK One de Calvin Klein (100 ml).",
     "image": "ck-one",
-    "tags": ["calvin-klein", "ck-one", "perfume", "unisex", "frasco-100ml"]
+    "tags": ["perfume", "calvin-klein", "ck-one", "bottle-100ml", "pack-12"]
   }
 ]

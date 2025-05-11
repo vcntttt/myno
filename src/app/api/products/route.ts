@@ -42,7 +42,7 @@ export async function POST(req: Request): Promise<NextResponse> {
 
   if (!email) {
     const topGlobal = await getGlobalTop(10);
-
+    sections.push({ title: "Productos más vendidos", products: topGlobal });
     if (topGlobal.length === 0) {
       return NextResponse.json({
         sections: [
@@ -53,32 +53,49 @@ export async function POST(req: Request): Promise<NextResponse> {
         ],
       });
     }
-
-    sections.push({ title: "Productos más vendidos", products: topGlobal });
     return NextResponse.json({ sections });
   }
 
   const history = (await redis.get<Purchase[]>(`history:${email}`)) ?? [];
-  console.log("🚀 ~ POST ~ history:", history);
   if (history.length === 0) {
     return NextResponse.json({ sections });
   }
 
-  const uniqueIds: number[] = Array.from(
-    new Set(history.flatMap((h) => h.items).map((item) => Number(item.id)))
+  const allIds = Array.from(
+    new Set(history.flatMap((h) => h.items.map((i) => Number(i.id))))
   );
-  const recent: number[] = uniqueIds.slice(-2);
+  if (allIds.length < 2) {
+    return NextResponse.json({ sections });
+  }
 
-  for (const pid of recent) {
+  let bestPair: [number, number] = [allIds[0], allIds[1]];
+  let minSim = Infinity;
+  for (let i = 0; i < allIds.length; i++) {
+    for (let j = i + 1; j < allIds.length; j++) {
+      const a = products.find((p) => p.id === allIds[i])!;
+      const b = products.find((p) => p.id === allIds[j])!;
+      const sim = tagSimilarity(a, b);
+      if (sim < minSim) {
+        minSim = sim;
+        bestPair = [allIds[i], allIds[j]];
+      }
+    }
+  }
+
+  const used = new Set<number>(bestPair);
+  for (const pid of bestPair) {
     const base = products.find((p) => p.id === pid);
     if (!base) continue;
 
-    const scored = products
-      .filter((p) => p.id !== pid)
+    const candidates = products.filter((p) => p.id !== pid && !used.has(p.id));
+
+    const scored = candidates
       .map((p) => ({ p, score: tagSimilarity(base, p) }))
       .sort((a, b) => b.score - a.score)
       .slice(0, 4)
       .map((x) => x.p);
+
+    scored.forEach((p) => used.add(p.id));
 
     sections.push({
       title: `Porque compraste ${base.name}`,
@@ -87,26 +104,25 @@ export async function POST(req: Request): Promise<NextResponse> {
   }
 
   const coCounts: Record<number, number> = {};
-  const keys: string[] = (await redis.keys("history:*")) ?? [];
+  const keys = (await redis.keys("history:*")) ?? [];
   for (const key of keys) {
     if (key === `history:${email}`) continue;
-    const other: Purchase[] = (await redis.get<Purchase[]>(key)) ?? [];
-    for (const purchase of other) {
-      for (const item of purchase.items) {
-        const pid = Number(item.id);
-        coCounts[pid] = (coCounts[pid] ?? 0) + 1;
-      }
-    }
+    const other = (await redis.get<Purchase[]>(key)) ?? [];
+    other.forEach((h) =>
+      h.items.forEach((i) => {
+        const idNum = Number(i.id);
+        coCounts[idNum] = (coCounts[idNum] ?? 0) + 1;
+      })
+    );
   }
 
-  const excluded = new Set<number>(recent);
-  const alsoBoughtIds: number[] = Object.entries(coCounts)
+  const alsoBoughtIds = Object.entries(coCounts)
     .sort(([, a], [, b]) => b - a)
     .map(([id]) => Number(id))
-    .filter((id) => !excluded.has(id))
+    .filter((id) => !used.has(id))
     .slice(0, 10);
 
-  const alsoBought: Product[] = alsoBoughtIds
+  const alsoBought = alsoBoughtIds
     .map((id) => products.find((p) => p.id === id))
     .filter((p): p is Product => Boolean(p));
 
