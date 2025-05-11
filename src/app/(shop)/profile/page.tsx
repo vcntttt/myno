@@ -6,16 +6,21 @@ import { PersonalData } from "@/components/profile/personal-data";
 import { SecurityOptions } from "@/components/profile/security-options";
 import { useUserStore } from "@/store/user";
 import { useMounted } from "@/hooks/use-mounted";
-import { redirect } from "next/navigation";
-import { ProfileSkeleton } from "@/components/profile/profile-skeleton";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function ProfilePage() {
   const user = useUserStore((state) => state.user);
   const mounted = useMounted();
+  const router = useRouter();
 
-  if (!mounted) return <ProfileSkeleton />;
+  useEffect(() => {
+    if (mounted && !user) {
+      router.replace("/auth/non-authorized");
+    }
+  }, [mounted, user, router]);
 
-  if (!user) redirect("/auth/non-authorized");
+  if (!mounted || !user) return null;
 
   return (
     <div className="flex flex-col md:flex-row gap-8">

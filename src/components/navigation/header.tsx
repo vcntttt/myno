@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Search, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 import { ShoppingCartButton } from "./shopping-cart";
 import { SearchBar } from "./search";
 import { useUserStore } from "@/store/user";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useMounted } from "@/hooks/use-mounted";
 import { UserZoneSkeleton } from "@/components/navigation/user-zone-skeleton";
 
@@ -25,11 +25,15 @@ export default function Header() {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
   const mounted = useMounted();
+  const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
-    redirect("/");
-  };
+  useEffect(() => {
+    if (mounted && !user) {
+      router.replace("/auth/non-authorized");
+    }
+  }, [mounted, user, router]);
+
+  if (!mounted || !user) return null;
 
   return (
     <header
@@ -91,7 +95,7 @@ export default function Header() {
                   <Link href="/profile/history">Historial</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout}>
+                <DropdownMenuItem onClick={() => logout()}>
                   Cerrar Sesión
                 </DropdownMenuItem>
               </DropdownMenuContent>
