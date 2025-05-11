@@ -14,7 +14,7 @@ export const getStatusVariant = (status: string) => {
 export const getStatusLabel = (status: string) => {
   switch (status.toLowerCase()) {
     case "delivered":
-      return "Entregado";
+      return "Completado";
     case "processing":
       return "En proceso";
     case "cancelled":

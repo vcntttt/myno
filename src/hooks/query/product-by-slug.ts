@@ -4,8 +4,7 @@ import products from "@/lib/data/products.json";
 
 async function getProductBySlug(slug: string): Promise<Product> {
   const res = await fetch(`/api/products/${slug}`);
-  const data = (await res.json()) as Product;
-  return data;
+  return res.json();
 }
 
 export const useProductBySlug = (slug: string) => {
