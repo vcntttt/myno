@@ -5,10 +5,12 @@ import { ProductsInCart } from "@/components/cart/products-in-cart";
 import { useCartStore } from "@/store/cart";
 import { EmptyCart } from "@/components/cart/empty-cart";
 import { ProductGrid } from "@/components/products/product-grid";
+import { useCartRecommendations } from "@/hooks/use-cart-recommendations";
 
 export function ClientCartPage() {
   const totalItems = useCartStore((state) => state.getSummary().totalItems);
   const isEmpty = totalItems === 0;
+  const recommendations = useCartRecommendations(4);
 
   return (
     <>
@@ -23,8 +25,14 @@ export function ClientCartPage() {
         <EmptyCart />
       )}
 
-      <h2 className="text-xl font-semibold mb-6">También te puede interesar</h2>
-      <ProductGrid products={[]} />
+      {!isEmpty && (
+        <>
+          <h2 className="text-xl font-semibold mb-6">
+            También te puede interesar
+          </h2>
+          <ProductGrid products={recommendations} />
+        </>
+      )}
     </>
   );
 }
