@@ -19,5 +19,10 @@ export async function POST(req: Request) {
   const key = `history:${email}`;
   const existing: Purchase[] = (await redis.get(key)) || [];
   await redis.set(key, [...existing, purchase]);
+
+  for (const item of purchase.items) {
+    await redis.hincrby("sales_count", item.id.toString(), item.quantity);
+  }
+
   return NextResponse.json({ ok: true });
 }
