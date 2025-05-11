@@ -6,6 +6,7 @@ interface Body {
   email: string;
   purchase: Purchase;
 }
+
 const redis = Redis.fromEnv();
 
 export async function POST(req: Request) {
