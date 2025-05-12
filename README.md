@@ -54,6 +54,18 @@ Los datos persistentes (historial de compras + contador de ventas) se almacenan 
    ```
 4. Abre tu navegador en `http://localhost:3000` para ver la aplicación.
 
+## Usuarios de prueba
+
+Para facilitar la demostración del motor de recomendaciones y el historial, tenemos dos usuarios preconfigurados con datos semilla en Redis:
+
+- **vrivera.dev@gmail.com**  
+  Historial orientado a perfumes y licores (Givenchy, Dior Sauvage, Vino Tinto, etc.).
+
+- **vrivera2023@alu.uct.cl**  
+  Historial centrado en frutas y verduras (manzanas, peras, plátanos, lechugas, etc.).
+
+Inicia sesión con cualquiera de estos correos para ver cómo cambia la portada y el historial.
+
 ## Enlaces
 
 - **Repositorio:** https://github.com/vcntttt/myno
