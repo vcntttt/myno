@@ -16,7 +16,7 @@ import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 import { ShoppingCartButton } from "./shopping-cart";
 import { SearchBar } from "./search";
 import { useUserStore } from "@/store/user";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useMounted } from "@/hooks/use-mounted";
 import { UserZoneSkeleton } from "@/components/navigation/user-zone-skeleton";
 
@@ -26,12 +26,15 @@ export default function Header() {
   const logout = useUserStore((state) => state.logout);
   const mounted = useMounted();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isProfile = pathname.startsWith("/profile");
 
   useEffect(() => {
-    if (mounted && !user) {
+    if (mounted && isProfile) {
       router.replace("/auth/non-authorized");
     }
-  }, [mounted, user, router]);
+  }, [mounted, user, router, isProfile]);
 
   if (!mounted || !user) return null;
 
