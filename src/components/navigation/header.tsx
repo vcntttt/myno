@@ -36,7 +36,7 @@ export default function Header() {
     }
   }, [mounted, user, router, isProfile]);
 
-  if (!mounted || !user) return null;
+  if (!mounted) return null;
 
   return (
     <header
