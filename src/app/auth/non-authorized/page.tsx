@@ -11,6 +11,7 @@ export default function NonAuthorizedPage() {
         </Link>{" "}
         para acceder a tu perfil.
       </p>
+      <Link href={"/"}>Volver al inicio</Link>
     </div>
   );
 }

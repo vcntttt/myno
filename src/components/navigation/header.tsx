@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Search, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,6 @@ import { ThemeSwitcher } from "@/components/navigation/theme-switcher";
 import { ShoppingCartButton } from "./shopping-cart";
 import { SearchBar } from "./search";
 import { useUserStore } from "@/store/user";
-import { usePathname, useRouter } from "next/navigation";
 import { useMounted } from "@/hooks/use-mounted";
 import { UserZoneSkeleton } from "@/components/navigation/user-zone-skeleton";
 
@@ -25,16 +24,6 @@ export default function Header() {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
   const mounted = useMounted();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const isProfile = pathname.startsWith("/profile");
-
-  useEffect(() => {
-    if (mounted && isProfile) {
-      router.replace("/auth/non-authorized");
-    }
-  }, [mounted, user, router, isProfile]);
 
   if (!mounted) return null;
 
