@@ -1,0 +1,16 @@
+name: Keep Website (and Upstash KV) Alive
+
+on:
+  schedule:
+    # Corre cada domingo a las 04:00 UTC (que equivale a medianoche en Santiago, UTC-4)
+    - cron: '0 4 * * 0'
+
+jobs:
+  ping-root:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit website root
+        run: |
+          curl --fail "https://myno-vr.vercel.app/" \
+            -H "User-Agent: keep-alive-bot" \
+            -o /dev/null
