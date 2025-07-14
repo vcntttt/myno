@@ -27,11 +27,27 @@ type UseRecommendationsOptions = Omit<
 export const useRecommendations = (options?: UseRecommendationsOptions) => {
   const user = useUserStore((state) => state.user);
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data,
+    isLoading,
+    error,
+    isError,
+    refetch,
+    isFetching,
+    isRefetchError,
+  } = useQuery({
     queryKey: ["recommendations", user?.email ?? "guest"],
     queryFn: () => getRecommendations(user?.email),
     ...options,
   });
 
-  return { data, isLoading, error };
+  return {
+    data,
+    isLoading,
+    error,
+    isError,
+    refetch,
+    isFetching,
+    isRefetchError,
+  };
 };
