@@ -38,6 +38,11 @@ export const useRecommendations = (options?: UseRecommendationsOptions) => {
   } = useQuery({
     queryKey: ["recommendations", user?.email ?? "guest"],
     queryFn: () => getRecommendations(user?.email),
+    select(data) {
+      return {
+      sections: data.sections.filter(section => section.products && section.products.length > 0),
+      };
+    },
     ...options,
   });
 
